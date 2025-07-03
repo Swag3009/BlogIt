@@ -42,6 +42,7 @@
     "@rollup/pluginutils": "^5.1.4",
     "@svgr/plugin-svgo": "^8.1.0",
     "@svgr/webpack": "^5.5.0",
+    "@tanstack/react-query": "^5.81.5",
     "@testing-library/jest-dom": "^5.14.1",
     "@testing-library/react": "^13.0.0",
     "@testing-library/user-event": "^13.2.1",

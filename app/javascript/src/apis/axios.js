@@ -1,8 +1,6 @@
 import axios from "axios";
 
-axios.defaults.baseURL = "/";
-
-export const setAuthHeaders = () => {
+const setAuthHeaders = () => {
   axios.defaults.headers = {
     Accept: "application/json",
     "Content-Type": "application/json",
@@ -17,3 +15,16 @@ export const setAuthHeaders = () => {
     axios.defaults.headers["X-Auth-Token"] = token;
   }
 };
+
+const responseInterceptor = () => {
+  axios.interceptors.response.use(
+    response => response.data,
+    error => Promise.reject(error)
+  );
+};
+
+export default function initializeAxios() {
+  axios.defaults.baseURL = "/";
+  setAuthHeaders();
+  responseInterceptor();
+}

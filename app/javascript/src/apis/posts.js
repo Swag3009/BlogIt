@@ -1,7 +1,7 @@
 import axios from "axios";
 
-const fetchPosts = () => axios.get("/posts");
+const fetch = () => axios.get("/posts");
 
-const postsApi = { fetchPosts };
+const postsApis = { fetch };
 
-export default postsApi;
+export default postsApis;
