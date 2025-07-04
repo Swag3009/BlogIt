@@ -1,5 +1,7 @@
 import axios from "axios";
 
+import { BASE_URL } from "./constants";
+
 const setAuthHeaders = () => {
   axios.defaults.headers = {
     Accept: "application/json",
@@ -24,7 +26,7 @@ const responseInterceptor = () => {
 };
 
 export default function initializeAxios() {
-  axios.defaults.baseURL = "/";
+  axios.defaults.baseURL = BASE_URL;
   setAuthHeaders();
   responseInterceptor();
 }

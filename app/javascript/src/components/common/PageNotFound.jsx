@@ -2,7 +2,8 @@ import React from "react";
 
 import { NoData } from "@bigbinary/neetoui";
 import { t } from "i18next";
-//import routes from "src/route";
+
+import routes from "../../route";
 
 const PageNotFound = () => (
   <div className="absolute left-1/3 top-1/3">
@@ -11,7 +12,7 @@ const PageNotFound = () => (
       primaryButtonProps={{
         label: t("buttons.backToHome"),
         className: "bg-neutral-800 hover:bg-neutral-950",
-        //to: routes.root,
+        to: routes.root,
       }}
     />
   </div>
