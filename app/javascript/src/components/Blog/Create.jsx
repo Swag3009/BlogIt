@@ -61,7 +61,11 @@ const CreatePost = () => {
             <Button style="secondary" type="reset">
               Cancel
             </Button>
-            <Button style="primary" type="submit">
+            <Button
+              className="bg-black hover:bg-gray-600"
+              style="primary"
+              type="submit"
+            >
               Submit
             </Button>
           </div>
