@@ -18,7 +18,7 @@ const Blogs = () => {
   if (isError) return <ErrorMessage />;
 
   return (
-    <Container className="ml-16 p-6">
+    <Container>
       <Typography className="mb-8" style="h1">
         {t("title.blogPost")}
       </Typography>
@@ -26,9 +26,11 @@ const Blogs = () => {
         <NoData title="No blog posts available." />
       ) : (
         <div className="space-y-6">
-          {posts.map(({ id, title, description, created_at: createdAt }) => (
-            <BlogCard key={id} {...{ title, description, createdAt }} />
-          ))}
+          {posts.map(
+            ({ id, title, description, slug, created_at: createdAt }) => (
+              <BlogCard key={id} {...{ title, description, createdAt, slug }} />
+            )
+          )}
         </div>
       )}
     </Container>

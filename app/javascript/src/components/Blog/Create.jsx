@@ -29,7 +29,7 @@ const CreatePost = () => {
   if (isLoading) return <PageLoader />;
 
   return (
-    <Container className="ml-16 p-6">
+    <Container>
       <Typography className="mb-6" style="h1">
         New blog post
       </Typography>
