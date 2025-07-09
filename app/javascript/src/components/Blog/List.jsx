@@ -4,7 +4,7 @@ import { NoData, Typography } from "@bigbinary/neetoui";
 import { isEmpty } from "ramda";
 import { useTranslation } from "react-i18next";
 
-import BlogList from "./List";
+import BlogCard from "./Card";
 
 import { useFetchPosts } from "../../hooks/reactQuery/usePostsApi";
 import { PageLoader, ErrorMessage } from "../common";
@@ -28,7 +28,11 @@ const Blogs = () => {
         {isEmpty(posts) ? (
           <NoData title="No blog posts available." />
         ) : (
-          <BlogList posts={posts} />
+          <div className="space-y-6">
+            {posts.map(({ id, title, description, created_at: createdAt }) => (
+              <BlogCard key={id} {...{ title, description, createdAt }} />
+            ))}
+          </div>
         )}
       </main>
     </div>
