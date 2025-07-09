@@ -1,3 +1,12 @@
 {
-  "helloWorld": "Hello World"
+  "title": {
+    "blogPost": "Blog posts"
+  },
+  "buttons": {},
+  "errors": {},
+  "message": {},
+  "header": {},
+  "labels": {},
+  "placeHolder": {},
+  "imageAlt": {}
 }
