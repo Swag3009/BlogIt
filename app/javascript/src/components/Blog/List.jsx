@@ -18,7 +18,7 @@ const Blogs = () => {
   if (isError) return <ErrorMessage />;
 
   return (
-    <Container className="ml-16 w-full p-6">
+    <Container className="ml-16 p-6">
       <Typography className="mb-8" style="h1">
         {t("title.blogPost")}
       </Typography>
