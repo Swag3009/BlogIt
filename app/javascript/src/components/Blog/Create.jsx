@@ -2,15 +2,31 @@ import React from "react";
 
 import { Typography, Button } from "@bigbinary/neetoui";
 import { Form, Input, Textarea } from "@bigbinary/neetoui/formik";
-import { Container } from "components/common";
+import { Container, PageLoader } from "components/common";
+import { useCreatePost } from "hooks/reactQuery/usePostsApi";
 import Logger from "js-logger";
+import { useHistory } from "react-router-dom";
 
 import { POST_INITIAL_VALUES, POST_VALIDATION_SCHEMA } from "./constants";
 
+import routes from "../../route";
+
 const CreatePost = () => {
-  const handleSubmit = values => {
-    Logger.info("Submitted values", values);
+  const history = useHistory();
+  const { mutate: createPost, isLoading } = useCreatePost();
+  const handleSubmit = payload => {
+    createPost(payload, {
+      onSuccess: response => {
+        Logger.info("Post Created", response.data);
+        history.push(routes.blogs);
+      },
+      onError: error => {
+        Logger.error("Error creating post:", error.response?.data);
+      },
+    });
   };
+
+  if (isLoading) return <PageLoader />;
 
   return (
     <Container className="ml-16 p-6">
@@ -45,7 +61,7 @@ const CreatePost = () => {
             <Button style="secondary" type="reset">
               Cancel
             </Button>
-            <Button style="primary" type="submit" onSubmit={handleSubmit}>
+            <Button style="primary" type="submit">
               Submit
             </Button>
           </div>
