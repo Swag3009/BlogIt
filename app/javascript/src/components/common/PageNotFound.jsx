@@ -6,7 +6,7 @@ import { t } from "i18next";
 import routes from "../../route";
 
 const PageNotFound = () => (
-  <div className="absolute left-1/3 top-1/3">
+  <div className="flex min-h-screen items-center justify-center">
     <NoData
       title={t("errors.pageNotFound")}
       primaryButtonProps={{
