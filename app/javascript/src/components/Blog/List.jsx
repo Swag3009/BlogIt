@@ -2,12 +2,11 @@ import React from "react";
 
 import { NoData, Typography } from "@bigbinary/neetoui";
 import { PageLoader, ErrorMessage, Container } from "components/common";
+import { useFetchPosts } from "hooks/reactQuery/usePostsApi";
 import { isEmpty } from "ramda";
 import { useTranslation } from "react-i18next";
 
 import BlogCard from "./Card";
-
-import { useFetchPosts } from "../../hooks/reactQuery/usePostsApi";
 
 const Blogs = () => {
   const { t } = useTranslation();
@@ -23,7 +22,7 @@ const Blogs = () => {
         {t("title.blogPost")}
       </Typography>
       {isEmpty(posts) ? (
-        <NoData title="No blog posts available." />
+        <NoData title={t("message.noBlogPost")} />
       ) : (
         <div className="space-y-6">
           {posts.map(

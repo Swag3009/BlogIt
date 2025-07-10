@@ -1,12 +1,12 @@
 import axios from "axios";
 
-import { POSTS_URL } from "./constants";
+import { URL } from "./constants";
 
-const fetch = () => axios.get(POSTS_URL);
+const fetch = () => axios.get(URL.POSTS);
 
-const create = payload => axios.post(POSTS_URL, { post: payload });
+const create = payload => axios.post(URL.POSTS, { post: payload });
 
-const show = slug => axios.get(`/posts/${slug}`);
+const show = slug => axios.get(`${URL.POSTS}/${slug}`);
 
 const postsApis = { fetch, create, show };
 

@@ -2,7 +2,7 @@ import { Toastr } from "@bigbinary/neetoui";
 import axios from "axios";
 import useAuthStore from "store/useAuthStore";
 
-import { BASE_URL, DEFAULT_ERROR_NOTIFICATION } from "./constants";
+import { URL, DEFAULT_ERROR_NOTIFICATION } from "./constants";
 
 const setAuthHeaders = () => {
   axios.defaults.headers = {
@@ -59,7 +59,7 @@ const responseInterceptor = () => {
 };
 
 export default function initializeAxios() {
-  axios.defaults.baseURL = BASE_URL;
+  axios.defaults.baseURL = URL.BASE;
   responseInterceptor();
   setAuthHeaders();
 }

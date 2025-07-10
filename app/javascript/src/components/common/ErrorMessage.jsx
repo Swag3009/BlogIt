@@ -5,7 +5,7 @@ import { t } from "i18next";
 
 const ErrorMessage = () => (
   <div className="flex h-screen w-full items-center justify-center">
-    <NoData title={t("errors.someThingWentWrong")} />
+    <NoData title={t("errors.default")} />
   </div>
 );
 

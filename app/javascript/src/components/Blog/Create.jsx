@@ -4,7 +4,7 @@ import { Typography, Button } from "@bigbinary/neetoui";
 import { Form, Input, Textarea } from "@bigbinary/neetoui/formik";
 import { Container, PageLoader } from "components/common";
 import { useCreatePost } from "hooks/reactQuery/usePostsApi";
-import Logger from "js-logger";
+import { useTranslation } from "react-i18next";
 import { useHistory } from "react-router-dom";
 
 import { POST_INITIAL_VALUES, POST_VALIDATION_SCHEMA } from "./constants";
@@ -12,16 +12,13 @@ import { POST_INITIAL_VALUES, POST_VALIDATION_SCHEMA } from "./constants";
 import routes from "../../route";
 
 const CreatePost = () => {
+  const { t } = useTranslation();
   const history = useHistory();
   const { mutate: createPost, isLoading } = useCreatePost();
   const handleSubmit = payload => {
     createPost(payload, {
-      onSuccess: response => {
-        Logger.info("Post Created", response.data);
+      onSuccess: () => {
         history.push(routes.blogs);
-      },
-      onError: error => {
-        Logger.error("Error creating post:", error.response?.data);
       },
     });
   };
@@ -31,7 +28,7 @@ const CreatePost = () => {
   return (
     <Container>
       <Typography className="mb-6" style="h1">
-        New blog post
+        {t("title.newBlogPost")}
       </Typography>
       <div className="flex-1 rounded-xl border bg-white p-8 shadow">
         <Form
@@ -44,29 +41,29 @@ const CreatePost = () => {
         >
           <Input
             required
-            label="Title"
+            label={t("labels.title")}
             maxLength={125}
             name="title"
-            placeholder="Enter title"
+            placeholder={t("placeHolder.enterTitle")}
           />
           <Textarea
             required
-            label="Description"
+            label={t("labels.description")}
             maxLength={10000}
             name="description"
-            placeholder="Enter Description"
+            placeholder={t("placeHolder.enterDescription")}
             rows={10}
           />
           <div className="flex justify-end space-x-6">
             <Button style="secondary" type="reset">
-              Cancel
+              {t("buttons.cancel")}
             </Button>
             <Button
               className="bg-black hover:bg-gray-600"
               style="primary"
               type="submit"
             >
-              Submit
+              {t("buttons.submit")}
             </Button>
           </div>
         </Form>
