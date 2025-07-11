@@ -13,8 +13,8 @@ class PostsController < ApplicationController
   end
 
   def show
-    post = Post.find_by!(slug: params[:slug])
-    render_json({ post: post })
+    @post = Post.includes(:user, :categories).find_by!(slug: params[:slug])
+    render
   end
 
   private

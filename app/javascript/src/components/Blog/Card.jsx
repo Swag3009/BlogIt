@@ -19,8 +19,8 @@ const Card = ({ title, categories, author_name, createdAt, slug }) => {
       <Typography style="h2">{title}</Typography>
       {isNotEmpty(categories) && (
         <div className="space-x-2">
-          {categories.map(category => (
-            <Tag key={category} label={category} style="info" type="outline" />
+          {categories.map(({ id, name }) => (
+            <Tag key={id} label={name} style="info" type="outline" />
           ))}
         </div>
       )}

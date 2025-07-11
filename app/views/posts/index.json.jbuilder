@@ -8,5 +8,5 @@ json.array!(@posts) do |post|
     :updated_at
 
   json.author_name post.user.name
-  json.categories post.categories.map(&:name)
+  json.categories post.categories, :id, :name
 end
