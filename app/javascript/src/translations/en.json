@@ -6,7 +6,8 @@
   "buttons": {
     "cancel": "Cancel",
     "submit": "Submit",
-    "backToHome": "Back to home"
+    "backToHome": "Back to home",
+    "addNewBlogPost": "Add new blog post"
   },
   "errors": {
     "default": "Something went wrong!",

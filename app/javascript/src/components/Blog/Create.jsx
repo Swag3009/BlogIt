@@ -5,6 +5,7 @@ import { Form, Input, Textarea, Select } from "@bigbinary/neetoui/formik";
 import { Container, PageLoader } from "components/common";
 import { useFetchCategories } from "hooks/reactQuery/useCategoriesApi";
 import { useCreatePost } from "hooks/reactQuery/usePostsApi";
+import { pluck } from "ramda";
 import { useTranslation } from "react-i18next";
 import { useHistory } from "react-router-dom";
 
@@ -17,7 +18,13 @@ const CreatePost = () => {
   const history = useHistory();
   const { data: categories = [] } = useFetchCategories();
   const { mutate: createPost, isLoading } = useCreatePost();
-  const handleSubmit = payload => {
+  const handleSubmit = ({ title, description, categories }) => {
+    const payload = {
+      title,
+      description,
+      category_ids: pluck("value", categories),
+    };
+
     createPost(payload, {
       onSuccess: () => {
         history.push(routes.blogs);

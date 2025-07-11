@@ -8,6 +8,9 @@ class PostsController < ApplicationController
 
   def create
     post = Post.new(post_params)
+    current_user = User.first
+    post.user = current_user
+    post.organization = current_user.organization
     post.save!
     render_notice(t("successfully_created"))
   end
