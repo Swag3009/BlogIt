@@ -3,6 +3,7 @@
 Rails.application.routes.draw do
   constraints(lambda { |req| req.format == :json }) do
     resources :posts, only: %i[index create show], param: :slug
+    resources :categories, only: :index
   end
 
   root "home#index"

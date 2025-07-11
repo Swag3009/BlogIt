@@ -14,18 +14,22 @@
     "titleMax": "Title must be at most 125 characters",
     "descriptionRequired": "Description is required",
     "descriptionMax": "Description must be at most 10000 characters",
-    "pageNotFound": "Sorry, we couldn't find the page you were looking for."
+    "pageNotFound": "Sorry, we couldn't find the page you were looking for.",
+    "categoriesAtLeastOne": "Select at least one category"
   },
   "message": {
     "noBlogPost": "No blog posts available."
   },
   "labels": {
     "title": "Title",
-    "description": "Description"
+    "description": "Description",
+    "add": "Add",
+    "categories": "Categories"
   },
   "placeHolder": {
     "enterDescription": "Enter Description",
-    "enterTitle": "Enter title"
+    "enterTitle": "Enter title",
+    "selectCategories": "Select"
   },
   "imageAlt": {}
 }

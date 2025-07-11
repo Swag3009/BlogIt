@@ -1,8 +1,9 @@
 import React from "react";
 
 import { Typography, Button } from "@bigbinary/neetoui";
-import { Form, Input, Textarea } from "@bigbinary/neetoui/formik";
+import { Form, Input, Textarea, Select } from "@bigbinary/neetoui/formik";
 import { Container, PageLoader } from "components/common";
+import { useFetchCategories } from "hooks/reactQuery/useCategoriesApi";
 import { useCreatePost } from "hooks/reactQuery/usePostsApi";
 import { useTranslation } from "react-i18next";
 import { useHistory } from "react-router-dom";
@@ -14,6 +15,7 @@ import routes from "../../route";
 const CreatePost = () => {
   const { t } = useTranslation();
   const history = useHistory();
+  const { data: categories = [] } = useFetchCategories();
   const { mutate: createPost, isLoading } = useCreatePost();
   const handleSubmit = payload => {
     createPost(payload, {
@@ -45,6 +47,15 @@ const CreatePost = () => {
             maxLength={125}
             name="title"
             placeholder={t("placeHolder.enterTitle")}
+          />
+          <Select
+            isMulti
+            required
+            addButtonLabel="Add"
+            label={t("labels.categories")}
+            name="categories"
+            options={categories}
+            placeholder={t("placeHolder.selectCategories")}
           />
           <Textarea
             required
