@@ -28,8 +28,18 @@ const Blogs = () => {
       ) : (
         <div className="space-y-6">
           {posts.map(
-            ({ id, title, description, slug, created_at: createdAt }) => (
-              <BlogCard key={id} {...{ title, description, createdAt, slug }} />
+            ({
+              id,
+              title,
+              categories,
+              slug,
+              author_name,
+              created_at: createdAt,
+            }) => (
+              <BlogCard
+                key={id}
+                {...{ title, categories, createdAt, slug, author_name }}
+              />
             )
           )}
         </div>

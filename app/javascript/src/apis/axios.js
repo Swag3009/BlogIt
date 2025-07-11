@@ -43,7 +43,8 @@ const handleErrorResponse = axiosErrorObject => {
   }
 
   Toastr.error(
-    axiosErrorObject.response?.data?.error || DEFAULT_ERROR_NOTIFICATION
+    axiosErrorObject.response?.data?.error || DEFAULT_ERROR_NOTIFICATION,
+    { autoClose: 3000 }
   );
   if (axiosErrorObject.response?.status === 423) {
     window.location.href = "/";
