@@ -2,8 +2,8 @@
 
 class PostsController < ApplicationController
   def index
-    posts = Post.order(created_at: :desc)
-    render status: :ok, json: { posts: }
+    @posts = Post.includes(:user, :categories).order(updated_at: :desc)
+    render
   end
 
   def create
@@ -20,6 +20,6 @@ class PostsController < ApplicationController
   private
 
     def post_params
-      params.require(:post).permit(:title, :description, :is_bloggable)
+      params.require(:post).permit(:title, :description, :is_bloggable, category_ids: [])
     end
 end

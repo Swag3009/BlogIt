@@ -3,6 +3,7 @@ import React from "react";
 import { NoData, Typography } from "@bigbinary/neetoui";
 import { PageLoader, ErrorMessage, Container } from "components/common";
 import { useFetchPosts } from "hooks/reactQuery/usePostsApi";
+import Logger from "js-logger";
 import { isEmpty } from "ramda";
 import { useTranslation } from "react-i18next";
 
@@ -10,7 +11,8 @@ import BlogCard from "./Card";
 
 const Blogs = () => {
   const { t } = useTranslation();
-  const { data: { posts = [] } = {}, isError, isFetching } = useFetchPosts();
+  const { data: posts = [], isError, isFetching } = useFetchPosts();
+  Logger.info(posts);
 
   if (isFetching) return <PageLoader />;
 
