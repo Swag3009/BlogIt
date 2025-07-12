@@ -8,6 +8,7 @@ import { useCreatePost } from "hooks/reactQuery/usePostsApi";
 import { pluck } from "ramda";
 import { useTranslation } from "react-i18next";
 import { useHistory } from "react-router-dom";
+import changeCategoryKeys from "utils/changeCategoryKeys";
 
 import { POST_INITIAL_VALUES, POST_VALIDATION_SCHEMA } from "./constants";
 
@@ -61,7 +62,7 @@ const CreatePost = () => {
             addButtonLabel="Add"
             label={t("labels.categories")}
             name="categories"
-            options={categories}
+            options={changeCategoryKeys(categories)}
             placeholder={t("placeHolder.selectCategories")}
           />
           <Textarea

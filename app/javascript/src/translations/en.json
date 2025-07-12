@@ -1,7 +1,8 @@
 {
   "title": {
     "blogPost": "Blog posts",
-    "newBlogPost": "New blog post"
+    "newBlogPost": "New blog post",
+    "categories": "CATEGORIES"
   },
   "buttons": {
     "cancel": "Cancel",
@@ -25,12 +26,14 @@
     "title": "Title",
     "description": "Description",
     "add": "Add",
-    "categories": "Categories"
+    "categories": "Categories",
+    "search": "Search"
   },
   "placeHolder": {
     "enterDescription": "Enter Description",
     "enterTitle": "Enter title",
-    "selectCategories": "Select"
+    "selectCategories": "Select",
+    "searchCategory": "Search category"
   },
   "imageAlt": {}
 }
