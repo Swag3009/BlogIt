@@ -1,16 +1,42 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 
 import { Typography, Input } from "@bigbinary/neetoui";
 import { PageLoader } from "components/common";
 import { useFetchCategories } from "hooks/reactQuery/useCategoriesApi";
+import useParamQuery from "hooks/useParamQuery";
+import { without, isEmpty } from "ramda";
 import { useTranslation } from "react-i18next";
+import { useHistory } from "react-router-dom";
 
 import List from "./List";
 
 const Sidebar = () => {
   const { t } = useTranslation();
+  const history = useHistory();
   const { data: categories = [], isLoading } = useFetchCategories();
   const [isSearchBarVisible, setIsSearchBarVisible] = useState(false);
+  const [selectedCategories, setSelectedCategories] = useState([]);
+  const query = useParamQuery();
+  useEffect(() => {
+    if (isEmpty(selectedCategories)) {
+      query.delete("categories");
+    } else {
+      query.set("categories", selectedCategories);
+    }
+
+    history.push({
+      pathname: "/blogs",
+      search: query?.toString() || "",
+    });
+  }, [selectedCategories]);
+
+  const handleSelectCategory = categoryId => {
+    setSelectedCategories(prevSelectedCategories =>
+      prevSelectedCategories.includes(categoryId)
+        ? without([categoryId], [...prevSelectedCategories])
+        : [categoryId, ...prevSelectedCategories]
+    );
+  };
 
   return (
     <div className="m-4">
@@ -36,7 +62,11 @@ const Sidebar = () => {
       {isLoading ? (
         <PageLoader />
       ) : (
-        categories.map(({ id, name }) => <List category={name} key={id} />)
+        categories.map(({ id, name }) => (
+          <div key={id} onClick={() => handleSelectCategory(id)}>
+            <List category={name} />
+          </div>
+        ))
       )}
     </div>
   );

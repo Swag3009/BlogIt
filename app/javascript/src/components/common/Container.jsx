@@ -6,7 +6,7 @@ import NavBar from "components/NavBar";
 import PropTypes from "prop-types";
 
 const Container = ({ children, className = "" }) => {
-  const [isSidebarOpen, setIsSidebarOpen] = useState(false);
+  const [isSidebarOpen, setIsSidebarOpen] = useState(true);
 
   return (
     <>
