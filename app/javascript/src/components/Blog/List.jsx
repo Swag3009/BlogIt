@@ -1,67 +1,52 @@
+// BlogListContent.jsx
 import { QUERY_KEYS } from "constants/query";
 
 import React from "react";
 
-import { NoData, Typography, Button } from "@bigbinary/neetoui";
-import { PageLoader, ErrorMessage, Container } from "components/common";
+import { NoData } from "@bigbinary/neetoui";
+import { PageLoader, ErrorMessage } from "components/common";
 import { useFetchPosts } from "hooks/reactQuery/usePostsApi";
 import useQueryParam from "hooks/useQueryParam";
 import { isEmpty } from "ramda";
 import { useTranslation } from "react-i18next";
-import { useHistory } from "react-router-dom";
 
 import BlogCard from "./Card";
 
-import routes from "../../route";
-
-const Blogs = () => {
-  const history = useHistory();
+const BlogListContent = () => {
   const { t } = useTranslation();
   const { query } = useQueryParam();
+
   const {
     data: posts = [],
     isError,
     isFetching,
   } = useFetchPosts(query.get(QUERY_KEYS.CATEGORIES) || "");
+
   if (isFetching) return <PageLoader />;
 
   if (isError) return <ErrorMessage />;
 
+  if (isEmpty(posts)) return <NoData title={t("message.noBlogPost")} />;
+
   return (
-    <Container>
-      <div className="flex justify-between pb-8">
-        <Typography style="h1">{t("title.blogPost")}</Typography>
-        <Button
-          className="bg-black hover:bg-gray-600"
-          style="primary"
-          onClick={() => history.push(routes.createBlog)}
-        >
-          {t("buttons.addNewBlogPost")}
-        </Button>
-      </div>
-      {isEmpty(posts) ? (
-        <NoData title={t("message.noBlogPost")} />
-      ) : (
-        <div className="space-y-6">
-          {posts.map(
-            ({
-              id,
-              title,
-              categories,
-              slug,
-              author_name,
-              created_at: createdAt,
-            }) => (
-              <BlogCard
-                key={id}
-                {...{ title, categories, createdAt, slug, author_name }}
-              />
-            )
-          )}
-        </div>
+    <div className="space-y-6">
+      {posts.map(
+        ({
+          id,
+          title,
+          categories,
+          slug,
+          author_name,
+          created_at: createdAt,
+        }) => (
+          <BlogCard
+            key={id}
+            {...{ title, categories, createdAt, slug, author_name }}
+          />
+        )
       )}
-    </Container>
+    </div>
   );
 };
 
-export default Blogs;
+export default BlogListContent;

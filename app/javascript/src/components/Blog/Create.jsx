@@ -2,7 +2,7 @@ import React from "react";
 
 import { Typography, Button } from "@bigbinary/neetoui";
 import { Form, Input, Textarea, Select } from "@bigbinary/neetoui/formik";
-import { Container, PageLoader } from "components/common";
+import { PageLoader } from "components/common";
 import { useFetchCategories } from "hooks/reactQuery/useCategoriesApi";
 import { useCreatePost } from "hooks/reactQuery/usePostsApi";
 import { pluck } from "ramda";
@@ -36,7 +36,7 @@ const CreatePost = () => {
   if (isLoading) return <PageLoader />;
 
   return (
-    <Container>
+    <div>
       <Typography className="mb-6" style="h1">
         {t("title.newBlogPost")}
       </Typography>
@@ -87,7 +87,7 @@ const CreatePost = () => {
           </div>
         </Form>
       </div>
-    </Container>
+    </div>
   );
 };
 
