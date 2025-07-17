@@ -24,7 +24,8 @@
     "nameRequired": "Name is required"
   },
   "message": {
-    "noBlogPost": "No blog posts available."
+    "noBlogPost": "No blog posts available.",
+    "noCategory": "No categories found"
   },
   "labels": {
     "title": "Title",

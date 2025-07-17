@@ -5,19 +5,22 @@ import React, { useEffect, useState } from "react";
 import { Typography, Input } from "@bigbinary/neetoui";
 import { PageLoader } from "components/common";
 import { useFetchCategories } from "hooks/reactQuery/useCategoriesApi";
+import useDebounce from "hooks/useDebounce";
 import useQueryParam from "hooks/useQueryParam";
 import { symmetricDifference } from "ramda";
 import { useTranslation } from "react-i18next";
 import { useLocation } from "react-router-dom";
 
 import Create from "./Create";
-import List from "./List";
+import CategoryList from "./List";
 
 import routes from "../../route";
 
 const Sidebar = () => {
   const { t } = useTranslation();
   const location = useLocation();
+  const [searchValue, setSearchValue] = useState("");
+  const debouncedSearchValue = useDebounce(searchValue);
   const [currentPath, setCurrentPath] = useState(location.pathname);
   const isDisabled = currentPath !== routes.blogs;
 
@@ -38,6 +41,10 @@ const Sidebar = () => {
     setCurrentPath(location.pathname);
     setSelectedCategories([]);
   }, [location.pathname]);
+
+  const handleSearch = value => {
+    setSearchValue(value);
+  };
 
   const handleSelectCategory = categoryId => {
     const updatedCategoryList = symmetricDifference(
@@ -73,21 +80,20 @@ const Sidebar = () => {
             placeholder={t("placeHolder.searchCategory")}
             prefix={<i className="ri_search_line" />}
             type="search"
+            onChange={({ target: { value } }) => handleSearch(value)}
           />
         )}
       </header>
       {isLoading ? (
         <PageLoader />
       ) : (
-        categories.map(({ id, name }) => (
-          <div key={id} onClick={() => !isDisabled && handleSelectCategory(id)}>
-            <List
-              category={name}
-              isDisabled={isDisabled}
-              isSelected={selectedCategories.includes(id)}
-            />
-          </div>
-        ))
+        <CategoryList
+          categories={categories}
+          debouncedSearchValue={debouncedSearchValue}
+          handleSelectCategory={handleSelectCategory}
+          isDisabled={isDisabled}
+          selectedCategories={selectedCategories}
+        />
       )}
     </div>
   );
