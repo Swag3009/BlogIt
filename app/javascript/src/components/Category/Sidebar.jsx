@@ -10,6 +10,7 @@ import { symmetricDifference } from "ramda";
 import { useTranslation } from "react-i18next";
 import { useLocation } from "react-router-dom";
 
+import Create from "./Create";
 import List from "./List";
 
 import routes from "../../route";
@@ -23,6 +24,7 @@ const Sidebar = () => {
   const { data: categories = [], isLoading } = useFetchCategories();
   const [isSearchBarVisible, setIsSearchBarVisible] = useState(false);
   const { query, setQueryParam } = useQueryParam();
+  const [isModalOpen, setIsModalOpen] = useState(false);
 
   const [selectedCategories, setSelectedCategories] = useState(() => {
     const categoryQuery = query.get(QUERY_KEYS.CATEGORIES);
@@ -56,7 +58,14 @@ const Sidebar = () => {
               className="ri-search-line text-xl"
               onClick={() => setIsSearchBarVisible(prev => !prev)}
             />
-            <i className="ri-add-fill text-2xl" />
+            <i
+              className="ri-add-fill text-2xl"
+              onClick={() => setIsModalOpen(true)}
+            />
+            <Create
+              isOpen={isModalOpen}
+              onClose={() => setIsModalOpen(false)}
+            />
           </div>
         </div>
         {isSearchBarVisible && (
