@@ -1,25 +1,22 @@
-import React, { useState } from "react";
+import React from "react";
 
 import { Typography } from "@bigbinary/neetoui";
 import classnames from "classnames";
 
-const List = ({ category }) => {
-  const [isSelected, setIsSelected] = useState(false);
-
-  return (
-    <div
-      className={classnames(
-        "my-2 cursor-pointer rounded-lg border border-gray-300 px-3 py-2 transition-all duration-300 ease-in-out",
-        {
-          "bg-black text-white": isSelected,
-          "hover:bg-gray-900 hover:text-white hover:shadow-md": !isSelected,
-        }
-      )}
-      onClick={() => setIsSelected(prev => !prev)}
-    >
-      <Typography>{category}</Typography>
-    </div>
-  );
-};
+const List = ({ category, isSelected, onClick }) => (
+  <div
+    className={classnames(
+      "my-2 cursor-pointer rounded-xl border px-4 py-2 text-sm font-medium transition-all duration-200 ease-in-out",
+      {
+        "border-blue-300 bg-blue-100 text-blue-800 shadow-sm": isSelected,
+        "border-gray-300 bg-white text-gray-800 hover:bg-gray-100 hover:shadow":
+          !isSelected,
+      }
+    )}
+    onClick={onClick}
+  >
+    <Typography>{category}</Typography>
+  </div>
+);
 
 export default List;

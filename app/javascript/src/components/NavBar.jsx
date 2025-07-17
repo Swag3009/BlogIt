@@ -12,7 +12,9 @@ const NavBar = ({ onToggleSidebar, isFocused }) => (
       <NavLink
         exact
         activeClassName="bg-blue-100 rounded-md p-1"
-        to={routes.blogs}
+        to={{
+          pathname: routes.blogs,
+        }}
       >
         <i className="ri-book-line text-2xl" />
       </NavLink>

@@ -1,41 +1,37 @@
-import React, { useState, useEffect } from "react";
+import { QUERY_KEYS } from "constants/query";
+
+import React, { useState } from "react";
 
 import { Typography, Input } from "@bigbinary/neetoui";
 import { PageLoader } from "components/common";
 import { useFetchCategories } from "hooks/reactQuery/useCategoriesApi";
-import useParamQuery from "hooks/useParamQuery";
-import { without, isEmpty } from "ramda";
+import useQueryParam from "hooks/useQueryParam";
+import { symmetricDifference } from "ramda";
 import { useTranslation } from "react-i18next";
-import { useHistory } from "react-router-dom";
 
 import List from "./List";
 
 const Sidebar = () => {
   const { t } = useTranslation();
-  const history = useHistory();
   const { data: categories = [], isLoading } = useFetchCategories();
   const [isSearchBarVisible, setIsSearchBarVisible] = useState(false);
-  const [selectedCategories, setSelectedCategories] = useState([]);
-  const query = useParamQuery();
-  useEffect(() => {
-    if (isEmpty(selectedCategories)) {
-      query.delete("categories");
-    } else {
-      query.set("categories", selectedCategories);
-    }
+  const { query, setQueryParam } = useQueryParam();
+  const [selectedCategories, setSelectedCategories] = useState(() => {
+    const categoryQuery = query.get("categories");
 
-    history.push({
-      pathname: "/blogs",
-      search: query?.toString() || "",
-    });
-  }, [selectedCategories]);
+    return categoryQuery
+      ? categoryQuery.split(",").filter(Boolean).map(Number)
+      : [];
+  });
 
   const handleSelectCategory = categoryId => {
-    setSelectedCategories(prevSelectedCategories =>
-      prevSelectedCategories.includes(categoryId)
-        ? without([categoryId], [...prevSelectedCategories])
-        : [categoryId, ...prevSelectedCategories]
+    const updatedCategoryList = symmetricDifference(
+      [categoryId],
+      selectedCategories
     );
+
+    setQueryParam(QUERY_KEYS.CATEGORIES, updatedCategoryList.join(","));
+    setSelectedCategories(updatedCategoryList);
   };
 
   return (
@@ -64,7 +60,10 @@ const Sidebar = () => {
       ) : (
         categories.map(({ id, name }) => (
           <div key={id} onClick={() => handleSelectCategory(id)}>
-            <List category={name} />
+            <List
+              category={name}
+              isSelected={selectedCategories.includes(id)}
+            />
           </div>
         ))
       )}

@@ -15,7 +15,6 @@ const Blogs = () => {
   const history = useHistory();
   const { t } = useTranslation();
   const { data: posts = [], isError, isFetching } = useFetchPosts();
-
   if (isFetching) return <PageLoader />;
 
   if (isError) return <ErrorMessage />;
