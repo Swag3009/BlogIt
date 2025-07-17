@@ -17,7 +17,7 @@ const Sidebar = () => {
   const [isSearchBarVisible, setIsSearchBarVisible] = useState(false);
   const { query, setQueryParam } = useQueryParam();
   const [selectedCategories, setSelectedCategories] = useState(() => {
-    const categoryQuery = query.get("categories");
+    const categoryQuery = query.get(QUERY_KEYS.CATEGORIES);
 
     return categoryQuery
       ? categoryQuery.split(",").filter(Boolean).map(Number)

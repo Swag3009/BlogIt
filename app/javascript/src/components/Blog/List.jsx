@@ -1,8 +1,11 @@
+import { QUERY_KEYS } from "constants/query";
+
 import React from "react";
 
 import { NoData, Typography, Button } from "@bigbinary/neetoui";
 import { PageLoader, ErrorMessage, Container } from "components/common";
 import { useFetchPosts } from "hooks/reactQuery/usePostsApi";
+import useQueryParam from "hooks/useQueryParam";
 import { isEmpty } from "ramda";
 import { useTranslation } from "react-i18next";
 import { useHistory } from "react-router-dom";
@@ -14,7 +17,12 @@ import routes from "../../route";
 const Blogs = () => {
   const history = useHistory();
   const { t } = useTranslation();
-  const { data: posts = [], isError, isFetching } = useFetchPosts();
+  const { query } = useQueryParam();
+  const {
+    data: posts = [],
+    isError,
+    isFetching,
+  } = useFetchPosts(query.get(QUERY_KEYS.CATEGORIES) || "");
   if (isFetching) return <PageLoader />;
 
   if (isError) return <ErrorMessage />;

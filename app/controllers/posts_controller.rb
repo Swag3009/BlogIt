@@ -2,7 +2,17 @@
 
 class PostsController < ApplicationController
   def index
-    @posts = Post.includes(:user, :categories).order(updated_at: :desc)
+    if params[:categories].present?
+      category_ids = params[:categories].split(",").map(&:to_i)
+      @posts = Post
+        .includes(:user, :categories)
+        .joins(:categories)
+        .where(categories: { id: category_ids })
+        .distinct
+        .order(updated_at: :desc)
+    else
+      @posts = Post.includes(:user, :categories).order(updated_at: :desc)
+    end
     render
   end
 

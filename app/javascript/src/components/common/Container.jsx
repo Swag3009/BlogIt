@@ -6,7 +6,7 @@ import NavBar from "components/NavBar";
 import PropTypes from "prop-types";
 
 const Container = ({ children, className = "" }) => {
-  const [isSidebarOpen, setIsSidebarOpen] = useState(true);
+  const [isSidebarOpen, setIsSidebarOpen] = useState(false);
 
   return (
     <>
@@ -22,10 +22,7 @@ const Container = ({ children, className = "" }) => {
             "overflow-y-auto bg-gray-100"
           )}
         >
-          <CategorySidebar
-            isOpen={isSidebarOpen}
-            onClose={() => setIsSidebarOpen(false)}
-          />
+          <CategorySidebar isOpen={isSidebarOpen} />
         </div>
         <main
           className={classnames(
