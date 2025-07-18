@@ -1,12 +1,16 @@
 {
   "title": {
     "blogPost": "Blog posts",
-    "newBlogPost": "New blog post"
+    "newBlogPost": "New blog post",
+    "categories": "CATEGORIES",
+    "newCategory": "New category"
   },
   "buttons": {
     "cancel": "Cancel",
     "submit": "Submit",
-    "backToHome": "Back to home"
+    "backToHome": "Back to home",
+    "addNewBlogPost": "Add new blog post",
+    "add": "Add"
   },
   "errors": {
     "default": "Something went wrong!",
@@ -14,18 +18,29 @@
     "titleMax": "Title must be at most 125 characters",
     "descriptionRequired": "Description is required",
     "descriptionMax": "Description must be at most 10000 characters",
-    "pageNotFound": "Sorry, we couldn't find the page you were looking for."
+    "pageNotFound": "Sorry, we couldn't find the page you were looking for.",
+    "categoriesAtLeastOne": "Select at least one category",
+    "nameMax": "Name must be at most 125 characters",
+    "nameRequired": "Name is required"
   },
   "message": {
-    "noBlogPost": "No blog posts available."
+    "noBlogPost": "No blog posts available.",
+    "noCategory": "No categories found"
   },
   "labels": {
     "title": "Title",
-    "description": "Description"
+    "description": "Description",
+    "add": "Add",
+    "categories": "Categories",
+    "search": "Search",
+    "categoryName": "Category name"
   },
   "placeHolder": {
     "enterDescription": "Enter Description",
-    "enterTitle": "Enter title"
+    "enterTitle": "Enter title",
+    "selectCategories": "Select",
+    "searchCategory": "Search category",
+    "enterCategoryName": "Enter category name"
   },
   "imageAlt": {}
 }

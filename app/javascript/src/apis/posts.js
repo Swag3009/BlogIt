@@ -2,7 +2,7 @@ import axios from "axios";
 
 import { URL } from "./constants";
 
-const fetch = () => axios.get(URL.POSTS);
+const fetch = (params = {}) => axios.get(URL.POSTS, { params });
 
 const create = payload => axios.post(URL.POSTS, { post: payload });
 

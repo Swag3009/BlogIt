@@ -1,11 +1,14 @@
 import React from "react";
 
 import { Typography, Button } from "@bigbinary/neetoui";
-import { Form, Input, Textarea } from "@bigbinary/neetoui/formik";
-import { Container, PageLoader } from "components/common";
+import { Form, Input, Textarea, Select } from "@bigbinary/neetoui/formik";
+import { PageLoader } from "components/common";
+import { useFetchCategories } from "hooks/reactQuery/useCategoriesApi";
 import { useCreatePost } from "hooks/reactQuery/usePostsApi";
+import { pluck } from "ramda";
 import { useTranslation } from "react-i18next";
 import { useHistory } from "react-router-dom";
+import changeCategoryKeys from "utils/changeCategoryKeys";
 
 import { POST_INITIAL_VALUES, POST_VALIDATION_SCHEMA } from "./constants";
 
@@ -14,8 +17,15 @@ import routes from "../../route";
 const CreatePost = () => {
   const { t } = useTranslation();
   const history = useHistory();
+  const { data: categories = [] } = useFetchCategories();
   const { mutate: createPost, isLoading } = useCreatePost();
-  const handleSubmit = payload => {
+  const handleSubmit = ({ title, description, categories }) => {
+    const payload = {
+      title,
+      description,
+      category_ids: pluck("value", categories),
+    };
+
     createPost(payload, {
       onSuccess: () => {
         history.push(routes.blogs);
@@ -26,7 +36,7 @@ const CreatePost = () => {
   if (isLoading) return <PageLoader />;
 
   return (
-    <Container>
+    <div>
       <Typography className="mb-6" style="h1">
         {t("title.newBlogPost")}
       </Typography>
@@ -45,6 +55,15 @@ const CreatePost = () => {
             maxLength={125}
             name="title"
             placeholder={t("placeHolder.enterTitle")}
+          />
+          <Select
+            isMulti
+            required
+            addButtonLabel="Add"
+            label={t("labels.categories")}
+            name="categories"
+            options={changeCategoryKeys(categories)}
+            placeholder={t("placeHolder.selectCategories")}
           />
           <Textarea
             required
@@ -68,7 +87,7 @@ const CreatePost = () => {
           </div>
         </Form>
       </div>
-    </Container>
+    </div>
   );
 };
 

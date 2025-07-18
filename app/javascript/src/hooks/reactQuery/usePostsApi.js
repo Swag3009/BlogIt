@@ -3,10 +3,19 @@ import { QUERY_KEYS } from "constants/query";
 import postsApis from "apis/posts";
 import { useQuery, useMutation } from "react-query";
 
-export const useFetchPosts = () =>
+export const useFetchPosts = ({
+  selectedCategories,
+  currentPage,
+  postsPerPage,
+}) =>
   useQuery({
-    queryKey: [QUERY_KEYS.POSTS],
-    queryFn: () => postsApis.fetch(),
+    queryKey: [QUERY_KEYS.POSTS, selectedCategories, currentPage, postsPerPage],
+    queryFn: () =>
+      postsApis.fetch({
+        categories: selectedCategories,
+        page: currentPage,
+        per_page: postsPerPage,
+      }),
   });
 
 export const useCreatePost = () =>
