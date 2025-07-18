@@ -1,7 +1,7 @@
 import React from "react";
 
 import { Typography, Tag, Avatar } from "@bigbinary/neetoui";
-import { Container, ErrorMessage, PageLoader } from "components/common";
+import { ErrorMessage, PageLoader } from "components/common";
 import dayjs from "dayjs";
 import { useShowPost } from "hooks/reactQuery/usePostsApi";
 import { isNotEmpty } from "ramda";
@@ -28,7 +28,7 @@ const Show = () => {
   if (isError) return <ErrorMessage />;
 
   return (
-    <Container className="space-y-6">
+    <div className="space-y-6">
       <header className="space-y-2 border-b pb-4">
         {isNotEmpty(categories) && (
           <div className="space-x-2">
@@ -59,7 +59,7 @@ const Show = () => {
         </div>
       </header>
       <Typography style="body1">{description}</Typography>
-    </Container>
+    </div>
   );
 };
 

@@ -1,6 +1,9 @@
 import { t } from "i18next";
 import * as yup from "yup";
 
+export const DEFAULT_PAGE_NUMBER = 1;
+export const DEFAULT_PAGE_ITEMS = 5;
+
 export const POST_INITIAL_VALUES = {
   title: "",
   description: "",

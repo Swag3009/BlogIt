@@ -13,6 +13,8 @@ class PostsController < ApplicationController
     else
       @posts = Post.includes(:user, :categories).order(updated_at: :desc)
     end
+
+    @paginated_posts = @posts.paginate(page: params[:page], per_page: params[:per_page] || 5)
     render
   end
 

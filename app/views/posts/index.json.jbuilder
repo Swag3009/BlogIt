@@ -1,4 +1,4 @@
-json.array!(@posts) do |post|
+json.posts @paginated_posts do |post|
   json.extract! post,
     :id,
     :slug,
@@ -10,3 +10,5 @@ json.array!(@posts) do |post|
   json.author_name post.user.name
   json.categories post.categories, :id, :name
 end
+
+json.total_entries @paginated_posts.total_entries
