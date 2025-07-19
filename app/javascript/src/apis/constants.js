@@ -6,5 +6,6 @@ export const URL = {
   CATEGORIES: `/categories`,
   ORGANIZATIONS: `/organizations`,
   USERS: `/users`,
+  SESSION: `/session`,
 };
 export const DEFAULT_ERROR_NOTIFICATION = t("errors.default");

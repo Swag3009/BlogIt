@@ -5,3 +5,8 @@ export const useSignUpUser = () =>
   useMutation({
     mutationFn: payload => authApi.signup(payload),
   });
+
+export const useSignInUser = () =>
+  useMutation({
+    mutationFn: payload => authApi.signin(payload),
+  });

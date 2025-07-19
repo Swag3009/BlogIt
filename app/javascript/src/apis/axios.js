@@ -4,23 +4,6 @@ import useAuthStore from "store/useAuthStore";
 
 import { URL, DEFAULT_ERROR_NOTIFICATION } from "./constants";
 
-const setAuthHeaders = () => {
-  axios.defaults.headers = {
-    Accept: "application/json",
-    "Content-Type": "application/json",
-    "X-CSRF-TOKEN": document
-      .querySelector('[name="csrf-token"]')
-      .getAttribute("content"),
-  };
-
-  const { authToken: token, authEmail: email } = useAuthStore.getState();
-
-  if (token && email) {
-    axios.defaults.headers["X-Auth-Email"] = email;
-    axios.defaults.headers["X-Auth-Token"] = token;
-  }
-};
-
 const handleSuccessResponse = response => {
   if (response) {
     response.success = response.status === 200;
@@ -57,6 +40,23 @@ const responseInterceptor = () => {
   axios.interceptors.response.use(handleSuccessResponse, error =>
     handleErrorResponse(error)
   );
+};
+
+export const setAuthHeaders = () => {
+  axios.defaults.headers = {
+    Accept: "application/json",
+    "Content-Type": "application/json",
+    "X-CSRF-TOKEN": document
+      .querySelector('[name="csrf-token"]')
+      .getAttribute("content"),
+  };
+
+  const { authToken: token, authEmail: email } = useAuthStore.getState();
+
+  if (token && email) {
+    axios.defaults.headers["X-Auth-Email"] = email;
+    axios.defaults.headers["X-Auth-Token"] = token;
+  }
 };
 
 export default function initializeAxios() {
