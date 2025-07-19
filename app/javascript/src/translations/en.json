@@ -5,7 +5,9 @@
     "categories": "CATEGORIES",
     "newCategory": "New category",
     "signUp": "Sign Up",
-    "orLoginNow": "Or Login Now"
+    "signIn": "Sign In",
+    "orLoginNow": "Or Login Now",
+    "orRegisterNow": "Or Register Now"
   },
   "buttons": {
     "cancel": "Cancel",

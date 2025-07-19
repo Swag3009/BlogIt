@@ -9,6 +9,11 @@ export const SIGN_UP_INITIAL_VALUES = {
   passwordConfirmation: "",
 };
 
+export const SIGN_IN_INITIAL_VALUES = {
+  email: "",
+  password: "",
+};
+
 export const SIGN_UP_VALIDATION_SCHEMA = yup.object().shape({
   name: yup
     .string()
@@ -35,4 +40,17 @@ export const SIGN_UP_VALIDATION_SCHEMA = yup.object().shape({
     .string()
     .required(t("errors.passwordConfirmationRequired"))
     .oneOf([yup.ref("password"), null], t("errors.passwordMatch")),
+});
+
+export const SIGN_IN_VALIDATION_SCHEMA = yup.object().shape({
+  email: yup
+    .string()
+    .required(t("errors.emailRequired"))
+    .email(t("errors.invalidEmail"))
+    .max(255, t("errors.emailMax")),
+
+  password: yup
+    .string()
+    .required(t("errors.passwordRequired"))
+    .min(6, t("errors.passwordMin")),
 });

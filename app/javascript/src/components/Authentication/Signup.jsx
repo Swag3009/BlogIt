@@ -5,6 +5,7 @@ import { Form, Input, Select } from "@bigbinary/neetoui/formik";
 import { useSignUpUser } from "hooks/reactQuery/useAuthApi";
 import { useFetchOrganizations } from "hooks/reactQuery/useOrganizationsApi";
 import { useTranslation } from "react-i18next";
+import { Link } from "react-router-dom";
 import { useHistory } from "react-router-dom/cjs/react-router-dom.min";
 import changeKeysLabelAndValue from "utils/changeKeysLabelAndValue";
 
@@ -44,13 +45,15 @@ const Signup = () => {
       <div className="w-full max-w-md space-y-6 p-8">
         <div className="text-center">
           <Typography style="h1">{t("title.signUp")}</Typography>
-          <Typography
-            className="cursor-pointer text-blue-700"
-            style="body2"
-            weight="semibold"
-          >
-            {t("title.orLoginNow")}
-          </Typography>
+          <Link to={routes.signin}>
+            <Typography
+              className="cursor-pointer text-blue-700"
+              style="body2"
+              weight="semibold"
+            >
+              {t("title.orLoginNow")}
+            </Typography>
+          </Link>
         </div>
         <Form
           className="space-y-6"
