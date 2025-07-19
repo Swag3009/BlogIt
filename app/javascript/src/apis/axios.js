@@ -59,6 +59,11 @@ export const setAuthHeaders = () => {
   }
 };
 
+export const resetAuthTokens = () => {
+  delete axios.defaults.headers["X-Auth-Email"];
+  delete axios.defaults.headers["X-Auth-Token"];
+};
+
 export default function initializeAxios() {
   axios.defaults.baseURL = URL.BASE;
   responseInterceptor();

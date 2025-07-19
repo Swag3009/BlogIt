@@ -7,7 +7,8 @@
     "signUp": "Sign Up",
     "signIn": "Sign In",
     "orLoginNow": "Or Login Now",
-    "orRegisterNow": "Or Register Now"
+    "orRegisterNow": "Or Register Now",
+    "alertToSignOut": "Are you sure you want to sign out?"
   },
   "buttons": {
     "cancel": "Cancel",
@@ -16,7 +17,8 @@
     "addNewBlogPost": "Add new blog post",
     "add": "Add",
     "loading": "Loading...",
-    "register": "Register"
+    "register": "Register",
+    "signOut": "Sign out"
   },
   "errors": {
     "default": "Something went wrong!",
@@ -40,7 +42,8 @@
   },
   "message": {
     "noBlogPost": "No blog posts available.",
-    "noCategory": "No categories found"
+    "noCategory": "No categories found",
+    "signOut": "You will be redirected to the sign in screen."
   },
   "labels": {
     "title": "Title",
