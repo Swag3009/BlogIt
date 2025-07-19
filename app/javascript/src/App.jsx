@@ -1,5 +1,6 @@
 import React from "react";
 
+import Signup from "components/Authentication/Signup";
 import { QueryClientProvider } from "react-query";
 import { Route, Switch, BrowserRouter as Router } from "react-router-dom";
 import { ToastContainer } from "react-toastify";
@@ -15,10 +16,10 @@ const App = () => (
       <ToastContainer />
       <Container>
         <Switch>
-          <Route exact path={routes.root} render={() => <h1>Home</h1>} />
           <Route exact component={Blogs} path={routes.blogs} />
           <Route exact component={CreateBlog} path={routes.createBlog} />
           <Route exact component={ShowBlog} path={routes.showBlog} />
+          <Route exact component={Signup} path="/signup" />
           <Route exact component={PageNotFound} path={routes.anyPath} />
         </Switch>
       </Container>

@@ -16,9 +16,9 @@ const NavBar = ({ onToggleSidebar, isFocused }) => (
       >
         <i className="ri-book-line text-2xl" />
       </NavLink>
-      <NavLink exact activeClassName="bg-blue-100 rounded-md p-1" to="/">
+      {/*<NavLink exact activeClassName="bg-blue-100 rounded-md p-1" to="/">
         <i className="ri-layout-row-line text-2xl" />
-      </NavLink>
+      </NavLink>*/}
       <NavLink
         exact
         activeClassName="bg-blue-100 rounded-md p-1"
