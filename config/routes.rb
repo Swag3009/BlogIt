@@ -6,6 +6,7 @@ Rails.application.routes.draw do
     resources :categories, only: %i[index create]
     resources :organizations, only: :index
     resources :users, only: :create
+    resource :session, only: :create
   end
 
   root "home#index"
