@@ -1,0 +1,7 @@
+import authApi from "apis/auth";
+import { useMutation } from "react-query";
+
+export const useSignUpUser = () =>
+  useMutation({
+    mutationFn: payload => authApi.signup(payload),
+  });

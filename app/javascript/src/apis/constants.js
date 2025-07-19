@@ -5,5 +5,6 @@ export const URL = {
   POSTS: `/posts`,
   CATEGORIES: `/categories`,
   ORGANIZATIONS: `/organizations`,
+  USERS: `/users`,
 };
 export const DEFAULT_ERROR_NOTIFICATION = t("errors.default");

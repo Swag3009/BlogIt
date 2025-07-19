@@ -2,16 +2,21 @@ import React from "react";
 
 import { Button, Typography } from "@bigbinary/neetoui";
 import { Form, Input, Select } from "@bigbinary/neetoui/formik";
+import { useSignUpUser } from "hooks/reactQuery/useAuthApi";
 import { useFetchOrganizations } from "hooks/reactQuery/useOrganizationsApi";
-import Logger from "js-logger";
 import { useTranslation } from "react-i18next";
+import { useHistory } from "react-router-dom/cjs/react-router-dom.min";
 import changeKeysLabelAndValue from "utils/changeKeysLabelAndValue";
 
 import { SIGN_UP_INITIAL_VALUES, SIGN_UP_VALIDATION_SCHEMA } from "./constants";
 
+import routes from "../../route";
+
 const Signup = () => {
+  const history = useHistory();
   const { t } = useTranslation();
   const { data: organizations = [] } = useFetchOrganizations();
+  const { mutate: signUp, isLoading } = useSignUpUser();
   const handleSubmit = ({
     name,
     email,
@@ -24,9 +29,14 @@ const Signup = () => {
       email,
       organization_id: organization.value,
       password,
-      passwordConfirmation,
+      password_confirmation: passwordConfirmation,
     };
-    Logger.info(payload);
+
+    signUp(payload, {
+      onSuccess: () => {
+        history.push(routes.blogs);
+      },
+    });
   };
 
   return (
@@ -89,7 +99,7 @@ const Signup = () => {
             style="primary"
             type="submit"
           >
-            {t("buttons.register") || t("buttons.loading")}
+            {isLoading ? t("buttons.loading") : t("buttons.register")}
           </Button>
         </Form>
       </div>

@@ -3,4 +3,5 @@ export const QUERY_KEYS = {
   CATEGORIES: "categories",
   PAGE: "page",
   ORGANIZATIONS: "organizations",
+  USERS: "users",
 };

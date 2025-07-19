@@ -24,7 +24,7 @@ class PostsController < ApplicationController
     post.user = current_user
     post.organization = current_user.organization
     post.save!
-    render_notice(t("successfully_created"))
+    render_notice(t("successfully_created", entity: "Post"))
   end
 
   def show
