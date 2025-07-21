@@ -75,3 +75,7 @@ gem "data_migrate"
 gem "bcrypt", "~> 3.1", ">= 3.1.12"
 
 gem "will_paginate", "~> 4.0"
+
+gem "byebug"
+
+gem "simplecov", require: false, group: :test
