@@ -1,9 +1,8 @@
 import React from "react";
 
 import classnames from "classnames";
+import Profile from "components/Profile";
 import { NavLink } from "react-router-dom";
-
-import Profile from "./Profile";
 
 import routes from "../route";
 

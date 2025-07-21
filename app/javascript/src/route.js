@@ -5,6 +5,7 @@ const routes = {
   signup: "/signup",
   createBlog: "/blogs/create",
   showBlog: "/blogs/:slug/show",
+  edit: "/blogs/:slug/edit",
   anyPath: "*",
 };
 

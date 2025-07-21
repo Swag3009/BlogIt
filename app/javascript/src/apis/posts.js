@@ -8,6 +8,9 @@ const create = payload => axios.post(URL.POSTS, { post: payload });
 
 const show = slug => axios.get(`${URL.POSTS}/${slug}`);
 
-const postsApis = { fetch, create, show };
+const update = (id, payload) =>
+  axios.put(`${URL.POSTS}/${id}`, { post: payload });
+
+const postsApis = { fetch, create, show, update };
 
 export default postsApis;

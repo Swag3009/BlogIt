@@ -9,5 +9,5 @@ json.post do
     :updated_at
   json.author_name @post.user.name
   json.categories @post.categories, :id, :name
+  json.can_edit policy(@post).update?
 end
-

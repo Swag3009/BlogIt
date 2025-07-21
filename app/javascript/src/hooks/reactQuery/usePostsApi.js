@@ -28,3 +28,8 @@ export const useShowPost = slug =>
     queryKey: [QUERY_KEYS.POSTS, slug],
     queryFn: () => postsApis.show(slug),
   });
+
+export const useUpdatePost = () =>
+  useMutation({
+    mutationFn: ({ id, payload }) => postsApis.update(id, payload),
+  });

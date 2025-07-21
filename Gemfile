@@ -68,6 +68,8 @@ group :test do
   # Use system testing [https://guides.rubyonrails.org/testing.html#system-testing]
 end
 
+gem "pundit"
+
 gem "react-rails", "~> 2.7.1"
 
 gem "data_migrate"
@@ -87,5 +89,3 @@ group :development, :test do
   # For auto-generating demo data
   gem "faker"
 end
-
-gem "pundit"

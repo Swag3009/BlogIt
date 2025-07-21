@@ -7,6 +7,7 @@ Rails.application.routes.draw do
         get :my_posts
       end
     end
+    put "/posts/:id", to: "posts#update"
 
     resources :categories, only: %i[index create]
     resources :organizations, only: :index

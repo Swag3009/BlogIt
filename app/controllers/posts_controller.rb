@@ -33,6 +33,13 @@ class PostsController < ApplicationController
     render
   end
 
+  def update
+    post = Post.find_by!(id: params[:id])
+    authorize post # Pundit check
+    post.update!(post_params)
+    render_notice(t("successfully_updated", entity: "Post"))
+  end
+
   private
 
     def filter_by_categories(posts)

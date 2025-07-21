@@ -1,27 +1,46 @@
 import React from "react";
 
-import { Typography, Tag, Avatar } from "@bigbinary/neetoui";
+import { Typography, Tag, Avatar, Button } from "@bigbinary/neetoui";
 import { ErrorMessage, PageLoader } from "components/common";
 import dayjs from "dayjs";
 import { useShowPost } from "hooks/reactQuery/usePostsApi";
 import { isNotEmpty } from "ramda";
-import { useParams } from "react-router-dom";
+import { useParams, useHistory } from "react-router-dom";
 
 const Show = () => {
   const { slug } = useParams();
+  const history = useHistory();
   const {
     data: {
       post: {
+        id,
         title,
         description,
         author_name,
         categories,
+        can_edit: canEdit,
         created_at: createdAt,
       } = {},
     } = {},
     isLoading,
     isError,
   } = useShowPost(slug);
+
+  const handleNaviagteToEdit = () => {
+    const postData = {
+      title,
+      description,
+      author_name,
+      categories,
+      createdAt,
+      id,
+    };
+
+    history.push({
+      pathname: `/blogs/${slug}/edit`,
+      state: { postData },
+    });
+  };
 
   if (isLoading) return <PageLoader />;
 
@@ -37,7 +56,14 @@ const Show = () => {
             ))}
           </div>
         )}
-        <Typography style="h1">{title}</Typography>
+        <div className="flex items-center justify-between">
+          <Typography style="h1">{title}</Typography>
+          {canEdit && (
+            <Button style="link" onClick={handleNaviagteToEdit}>
+              <i className="ri-edit-line text-2xl" />
+            </Button>
+          )}
+        </div>
         <div className="flex space-x-2">
           <Avatar
             user={{
