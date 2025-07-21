@@ -56,7 +56,8 @@
     "password": "Password",
     "passwordConfirmation": "Password confirmation",
     "organization": "Organization",
-    "email": "Email"
+    "email": "Email",
+    "signout": "Sign out"
   },
   "placeHolder": {
     "enterDescription": "Enter Description",

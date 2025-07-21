@@ -2,25 +2,27 @@
 
 class PostsController < ApplicationController
   def index
+    current_org_id = current_user.organization_id
+    posts = Post
+      .includes(:user, :categories)
+      .joins(:user)
+      .where(users: { organization_id: current_org_id })
+      .order(updated_at: :desc)
+
     if params[:categories].present?
       category_ids = params[:categories].split(",").map(&:to_i)
-      @posts = Post
-        .includes(:user, :categories)
+      posts = posts
         .joins(:categories)
         .where(categories: { id: category_ids })
         .distinct
-        .order(updated_at: :desc)
-    else
-      @posts = Post.includes(:user, :categories).order(updated_at: :desc)
     end
 
-    @paginated_posts = @posts.paginate(page: params[:page], per_page: params[:per_page] || 5)
+    @paginated_posts = posts.paginate(page: params[:page], per_page: params[:per_page] || 5)
     render
   end
 
   def create
     post = Post.new(post_params)
-    current_user = User.first
     post.user = current_user
     post.organization = current_user.organization
     post.save!
