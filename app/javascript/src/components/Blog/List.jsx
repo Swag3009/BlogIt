@@ -39,7 +39,6 @@ const BlogListContent = () => {
 
   useEffect(() => {
     setCurrentPage(DEFAULT_PAGE_NUMBER);
-    setQueryParam(QUERY_KEYS.PAGE, DEFAULT_PAGE_ITEMS.toString());
   }, [selectedCategories]);
 
   if (isFetching) return <PageLoader />;

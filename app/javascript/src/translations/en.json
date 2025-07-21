@@ -3,14 +3,22 @@
     "blogPost": "Blog posts",
     "newBlogPost": "New blog post",
     "categories": "CATEGORIES",
-    "newCategory": "New category"
+    "newCategory": "New category",
+    "signUp": "Sign Up",
+    "signIn": "Sign In",
+    "orLoginNow": "Or Login Now",
+    "orRegisterNow": "Or Register Now",
+    "alertToSignOut": "Are you sure you want to sign out?"
   },
   "buttons": {
     "cancel": "Cancel",
     "submit": "Submit",
     "backToHome": "Back to home",
     "addNewBlogPost": "Add new blog post",
-    "add": "Add"
+    "add": "Add",
+    "loading": "Loading...",
+    "register": "Register",
+    "signOut": "Sign out"
   },
   "errors": {
     "default": "Something went wrong!",
@@ -21,11 +29,21 @@
     "pageNotFound": "Sorry, we couldn't find the page you were looking for.",
     "categoriesAtLeastOne": "Select at least one category",
     "nameMax": "Name must be at most 125 characters",
-    "nameRequired": "Name is required"
+    "nameRequired": "Name is required",
+    "emailRequired": "Email is required",
+    "invalidEmail": "Invalid email format",
+    "emailMax": "Email must be at most 255 characters",
+    "organizationAtLeastOne": "Please select at least one organization",
+    "organizationRequired": "Organization is required",
+    "passwordRequired": "Password is required",
+    "passwordMin": "Password must be at least 6 characters",
+    "passwordConfirmationRequired": "Password confirmation is required",
+    "passwordMatch": "Passwords must match"
   },
   "message": {
     "noBlogPost": "No blog posts available.",
-    "noCategory": "No categories found"
+    "noCategory": "No categories found",
+    "signOut": "You will be redirected to the sign in screen."
   },
   "labels": {
     "title": "Title",
@@ -33,14 +51,25 @@
     "add": "Add",
     "categories": "Categories",
     "search": "Search",
-    "categoryName": "Category name"
+    "categoryName": "Category name",
+    "name": "Name",
+    "password": "Password",
+    "passwordConfirmation": "Password confirmation",
+    "organization": "Organization",
+    "email": "Email",
+    "signout": "Sign out"
   },
   "placeHolder": {
     "enterDescription": "Enter Description",
     "enterTitle": "Enter title",
     "selectCategories": "Select",
     "searchCategory": "Search category",
-    "enterCategoryName": "Enter category name"
+    "enterCategoryName": "Enter category name",
+    "enterName": "Enter name",
+    "enterEmail": "Enter email",
+    "enterPassword": "Enter password",
+    "confirmPassword": "Confirm password",
+    "selectOrganization": "Select organization"
   },
   "imageAlt": {}
 }

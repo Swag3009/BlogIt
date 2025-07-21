@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.1].define(version: 2025_07_10_165459) do
+ActiveRecord::Schema[7.1].define(version: 2025_07_19_164021) do
   create_table "categories", force: :cascade do |t|
     t.string "name", null: false
     t.datetime "created_at", null: false
@@ -21,9 +21,6 @@ ActiveRecord::Schema[7.1].define(version: 2025_07_10_165459) do
     t.integer "post_id", null: false
     t.integer "category_id", null: false
     t.index ["post_id", "category_id"], name: "index_categories_posts_on_post_id_and_category_id", unique: true
-  end
-
-  create_table "data_migrations", primary_key: "version", id: :string, force: :cascade do |t|
   end
 
   create_table "organizations", force: :cascade do |t|
@@ -55,6 +52,8 @@ ActiveRecord::Schema[7.1].define(version: 2025_07_10_165459) do
     t.integer "organization_id", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.string "authentication_token"
+    t.index ["email"], name: "index_users_on_email", unique: true
     t.index ["organization_id"], name: "index_users_on_organization_id"
   end
 

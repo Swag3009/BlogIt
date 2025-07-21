@@ -1,13 +1,14 @@
 import React from "react";
 
-import { Avatar } from "@bigbinary/neetoui";
 import classnames from "classnames";
 import { NavLink } from "react-router-dom";
+
+import Profile from "./Profile";
 
 import routes from "../route";
 
 const NavBar = ({ onToggleSidebar, isFocused }) => (
-  <div className="fixed left-0 top-0 z-10 flex h-screen w-16 flex-col items-center justify-between border-r bg-white shadow-sm">
+  <div className="fixed left-0 top-0 z-10 flex h-screen w-16 flex-col items-center justify-between overflow-visible border-r bg-white shadow-sm">
     <div className="mt-4 flex flex-col items-center space-y-4">
       <NavLink
         exact
@@ -16,9 +17,9 @@ const NavBar = ({ onToggleSidebar, isFocused }) => (
       >
         <i className="ri-book-line text-2xl" />
       </NavLink>
-      <NavLink exact activeClassName="bg-blue-100 rounded-md p-1" to="/">
+      {/*<NavLink exact activeClassName="bg-blue-100 rounded-md p-1" to="/">
         <i className="ri-layout-row-line text-2xl" />
-      </NavLink>
+      </NavLink>*/}
       <NavLink
         exact
         activeClassName="bg-blue-100 rounded-md p-1"
@@ -33,13 +34,7 @@ const NavBar = ({ onToggleSidebar, isFocused }) => (
         onClick={onToggleSidebar}
       />
     </div>
-    <div className="mb-4">
-      <Avatar
-        user={{
-          name: "Dummy",
-        }}
-      />
-    </div>
+    <Profile />
   </div>
 );
 
