@@ -87,3 +87,5 @@ group :development, :test do
   # For auto-generating demo data
   gem "faker"
 end
+
+gem "pundit"
