@@ -4,15 +4,7 @@ require "test_helper"
 
 class UserTest < ActiveSupport::TestCase
   def setup
-    @organization = Organization.create!(name: "TestOrg")
-
-    @user = User.new(
-      name: "Sam Smith",
-      email: "sam@example.com",
-      password: "welcome",
-      password_confirmation: "welcome",
-      organization: @organization
-    )
+    @user = build(:user)
   end
 
   def test_user_should_belong_to_an_organization
@@ -43,7 +35,7 @@ class UserTest < ActiveSupport::TestCase
   def test_user_should_not_be_valid_and_saved_if_email_not_unique
     @user.save!
 
-    test_user = @user.dup
+    test_user = build(:user, email: @user.email)
     assert_not test_user.valid?
 
     assert_includes test_user.errors.full_messages, "Email has already been taken"
@@ -101,9 +93,7 @@ class UserTest < ActiveSupport::TestCase
 
   def test_users_should_have_unique_auth_token
     @user.save!
-    second_user = User.create!(
-      name: "Olive Sans", email: "olive@example.com",
-      password: "welcome", password_confirmation: "welcome", organization: @organization)
+    second_user = create(:user)
 
     assert_not_same @user.authentication_token, second_user.authentication_token
   end
