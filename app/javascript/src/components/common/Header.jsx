@@ -1,6 +1,6 @@
-import React from "react";
+import React, { useState } from "react";
 
-import { ActionDropdown } from "@bigbinary/neetoui";
+import { ActionDropdown, Alert } from "@bigbinary/neetoui";
 import { useFormikContext } from "formik";
 import { useTranslation } from "react-i18next";
 
@@ -9,6 +9,7 @@ import { STATUS } from "../constant";
 const Header = ({ handleStatusChange, isEdit, handleDelete, status }) => {
   const { Menu, MenuItem, Divider } = ActionDropdown;
   const { submitForm } = useFormikContext();
+  const [showPostDeleteAlert, setShowPostDeleteAlert] = useState(false);
 
   const { t } = useTranslation();
   const statusLabel = t(
@@ -40,13 +41,24 @@ const Header = ({ handleStatusChange, isEdit, handleDelete, status }) => {
           {isEdit && (
             <>
               <Divider />
-              <MenuItem.Button style="danger" onClick={handleDelete}>
+              <MenuItem.Button
+                style="danger"
+                onClick={() => setShowPostDeleteAlert(true)}
+              >
                 {t("dropdown.delete")}
               </MenuItem.Button>
             </>
           )}
         </Menu>
       </ActionDropdown>
+      <Alert
+        isOpen={showPostDeleteAlert}
+        message={t("message.deletePost")}
+        submitButtonLabel={t("buttons.delete")}
+        title={t("title.alertToDeletePost")}
+        onClose={() => setShowPostDeleteAlert(false)}
+        onSubmit={handleDelete}
+      />
     </div>
   );
 };

@@ -40,6 +40,13 @@ class PostsController < ApplicationController
     render_notice(t("successfully_updated", entity: "Post"))
   end
 
+  def destroy
+    post = Post.find_by!(slug: params[:slug])
+    authorize post
+    post.destroy!
+    render_notice(t("successfully_deleted", entity: "Post"))
+  end
+
   private
 
     def filter_by_categories(posts)
@@ -55,6 +62,8 @@ class PostsController < ApplicationController
     end
 
     def post_params
+      return {} unless params[:post].present?
+
       params.require(:post).permit(:title, :description, :status, :is_bloggable, category_ids: [])
     end
 end

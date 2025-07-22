@@ -4,7 +4,7 @@ import { Typography, Button } from "@bigbinary/neetoui";
 import { Form, Input, Textarea, Select } from "@bigbinary/neetoui/formik";
 import { PageLoader, Header } from "components/common";
 import { useFetchCategories } from "hooks/reactQuery/useCategoriesApi";
-import { useUpdatePost } from "hooks/reactQuery/usePostsApi";
+import { useUpdatePost, useDeletePost } from "hooks/reactQuery/usePostsApi";
 import { pluck } from "ramda";
 import { useTranslation } from "react-i18next";
 import { useHistory, useLocation } from "react-router-dom";
@@ -23,6 +23,7 @@ const EditPost = () => {
   const { slug, title, description, categories: selectedCategories } = postData;
   const { data: categories = [] } = useFetchCategories();
   const { mutate: updatePost, isLoading } = useUpdatePost();
+  const { mutate: deletePost } = useDeletePost();
   const [postStatus, setPostStatus] = useState(STATUS.DRAFT);
   const POST_INITIAL_VALUES = {
     title,
@@ -48,7 +49,14 @@ const EditPost = () => {
       }
     );
   };
-  const handleDelete = () => {};
+
+  const handleDelete = () => {
+    deletePost(slug, {
+      onSuccess: () => {
+        history.push(routes.blogs);
+      },
+    });
+  };
 
   const handleStatusChange = status => {
     setPostStatus(status);

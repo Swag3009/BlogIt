@@ -11,6 +11,8 @@ const show = slug => axios.get(`${URL.POSTS}/${slug}`);
 const update = (slug, payload) =>
   axios.put(`${URL.POSTS}/${slug}`, { post: payload });
 
-const postsApis = { fetch, create, show, update };
+const destroy = slug => axios.delete(`${URL.POSTS}/${slug}`);
+
+const postsApis = { fetch, create, show, update, destroy };
 
 export default postsApis;

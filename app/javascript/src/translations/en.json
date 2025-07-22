@@ -9,7 +9,8 @@
     "signIn": "Sign In",
     "orLoginNow": "Or Login Now",
     "orRegisterNow": "Or Register Now",
-    "alertToSignOut": "Are you sure you want to sign out?"
+    "alertToSignOut": "Are you sure you want to sign out?",
+    "alertToDeletePost": "Delete post"
   },
   "buttons": {
     "cancel": "Cancel",
@@ -19,7 +20,8 @@
     "add": "Add",
     "loading": "Loading...",
     "register": "Register",
-    "signOut": "Sign out"
+    "signOut": "Sign out",
+    "delete": "Delete"
   },
   "errors": {
     "default": "Something went wrong!",
@@ -44,7 +46,8 @@
   "message": {
     "noBlogPost": "No blog posts available.",
     "noCategory": "No categories found",
-    "signOut": "You will be redirected to the sign in screen."
+    "signOut": "You will be redirected to the sign in screen.",
+    "deletePost": "Are you sure, you want to delete the post?"
   },
   "labels": {
     "title": "Title",

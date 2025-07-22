@@ -33,3 +33,8 @@ export const useUpdatePost = () =>
   useMutation({
     mutationFn: ({ slug, payload }) => postsApis.update(slug, payload),
   });
+
+export const useDeletePost = () =>
+  useMutation({
+    mutationFn: slug => postsApis.destroy(slug),
+  });
