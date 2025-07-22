@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState, useRef } from "react";
 
 import { Typography, Button } from "@bigbinary/neetoui";
 import { Form, Input, Textarea, Select } from "@bigbinary/neetoui/formik";
@@ -12,26 +12,31 @@ import { useHistory, useLocation } from "react-router-dom";
 import { POST_VALIDATION_SCHEMA } from "./constants";
 
 import routes from "../../route";
+import { STATUS } from "../constant";
 
 const EditPost = () => {
   const { t } = useTranslation();
   const history = useHistory();
   const location = useLocation();
   const { postData } = location.state || {};
+  const formikRef = useRef();
   const { id, title, description, categories: selectedCategories } = postData;
   const { data: categories = [] } = useFetchCategories();
   const { mutate: updatePost, isLoading } = useUpdatePost();
+  const [postStatus, setPostStatus] = useState(STATUS.DRAFT);
   const POST_INITIAL_VALUES = {
     title,
     description,
     categories: selectedCategories || [],
+    status: postStatus,
   };
 
-  const handleSubmit = ({ title, description, categories }) => {
+  const handleEdit = ({ title, description, categories }) => {
     const payload = {
       title,
       description,
       category_ids: pluck("id", categories),
+      status: postStatus,
     };
 
     updatePost(
@@ -43,24 +48,40 @@ const EditPost = () => {
       }
     );
   };
+  const handleDelete = () => {};
+
+  const handleStatusChange = status => {
+    setPostStatus(status);
+  };
 
   if (isLoading) return <PageLoader />;
 
   return (
     <div>
-      <div className="mb-6 flex items-center justify-between">
-        <Typography style="h1">{t("title.editBlogPost")}</Typography>
-        <Header />
-      </div>
       <div className="flex-1 rounded-xl border bg-white p-8 shadow">
         <Form
           className="space-y-6"
+          ref={formikRef}
           formikProps={{
             initialValues: POST_INITIAL_VALUES,
             validationSchema: POST_VALIDATION_SCHEMA,
-            onSubmit: handleSubmit,
+            onSubmit: handleEdit,
           }}
         >
+          <div className="mb-6 flex items-center justify-between">
+            <Typography style="h1">{t("title.editBlogPost")}</Typography>
+            <div className="flex space-x-4">
+              <Button style="secondary" type="reset">
+                {t("buttons.cancel")}
+              </Button>
+              <Header
+                isEdit
+                handleDelete={handleDelete}
+                handleStatusChange={handleStatusChange}
+                status={postStatus}
+              />
+            </div>
+          </div>
           <Input
             required
             label={t("labels.title")}
@@ -87,18 +108,6 @@ const EditPost = () => {
             placeholder={t("placeHolder.enterDescription")}
             rows={10}
           />
-          <div className="flex justify-end space-x-6">
-            <Button style="secondary" type="reset">
-              {t("buttons.cancel")}
-            </Button>
-            <Button
-              className="bg-black hover:bg-gray-600"
-              style="primary"
-              type="submit"
-            >
-              {t("buttons.submit")}
-            </Button>
-          </div>
         </Form>
       </div>
     </div>

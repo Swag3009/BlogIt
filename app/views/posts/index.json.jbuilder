@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 json.posts @paginated_posts do |post|
   json.extract! post,
     :id,

@@ -55,6 +55,6 @@ class PostsController < ApplicationController
     end
 
     def post_params
-      params.require(:post).permit(:title, :description, :is_bloggable, category_ids: [])
+      params.require(:post).permit(:title, :description, :status, :is_bloggable, category_ids: [])
     end
 end

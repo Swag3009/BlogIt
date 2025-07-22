@@ -1,17 +1,25 @@
 import React from "react";
 
 import { ActionDropdown } from "@bigbinary/neetoui";
+import { useFormikContext } from "formik";
 import { useTranslation } from "react-i18next";
 
-const Header = ({ handleStatusChange, isEdit, handleDelete }) => {
+import { STATUS } from "../constant";
+
+const Header = ({ handleStatusChange, isEdit, handleDelete, status }) => {
   const { Menu, MenuItem, Divider } = ActionDropdown;
+  const { submitForm } = useFormikContext();
+
   const { t } = useTranslation();
+  const statusLabel = t(
+    status === "draft" ? "dropdown.saveAsDraft" : "dropdown.publish"
+  );
 
   return (
     <div className="z-50 flex justify-end space-x-4">
       <ActionDropdown
         buttonStyle="primary"
-        label="Primary"
+        label={statusLabel}
         buttonProps={{
           className: "bg-black",
         }}
@@ -20,12 +28,13 @@ const Header = ({ handleStatusChange, isEdit, handleDelete }) => {
             className: "bg-black",
           },
         }}
+        onClick={submitForm}
       >
         <Menu>
-          <MenuItem.Button onClick={() => handleStatusChange("draft")}>
+          <MenuItem.Button onClick={() => handleStatusChange(STATUS.DRAFT)}>
             {t("dropdown.saveAsDraft")}
           </MenuItem.Button>
-          <MenuItem.Button onClick={() => handleStatusChange("publish")}>
+          <MenuItem.Button onClick={() => handleStatusChange(STATUS.PUBLISH)}>
             {t("dropdown.publish")}
           </MenuItem.Button>
           {isEdit && (
