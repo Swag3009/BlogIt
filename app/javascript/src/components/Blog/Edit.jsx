@@ -20,7 +20,7 @@ const EditPost = () => {
   const location = useLocation();
   const { postData } = location.state || {};
   const formikRef = useRef();
-  const { id, title, description, categories: selectedCategories } = postData;
+  const { slug, title, description, categories: selectedCategories } = postData;
   const { data: categories = [] } = useFetchCategories();
   const { mutate: updatePost, isLoading } = useUpdatePost();
   const [postStatus, setPostStatus] = useState(STATUS.DRAFT);
@@ -40,7 +40,7 @@ const EditPost = () => {
     };
 
     updatePost(
-      { id, payload },
+      { slug, payload },
       {
         onSuccess: () => {
           history.push(routes.blogs);

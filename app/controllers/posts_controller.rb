@@ -34,8 +34,8 @@ class PostsController < ApplicationController
   end
 
   def update
-    post = Post.find_by!(id: params[:id])
-    authorize post # Pundit check
+    post = Post.find_by!(slug: params[:slug])
+    authorize post
     post.update!(post_params)
     render_notice(t("successfully_updated", entity: "Post"))
   end

@@ -13,7 +13,6 @@ const Show = () => {
   const {
     data: {
       post: {
-        id,
         title,
         description,
         author_name,
@@ -33,7 +32,7 @@ const Show = () => {
       author_name,
       categories,
       createdAt,
-      id,
+      slug,
     };
 
     history.push({

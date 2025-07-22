@@ -2,12 +2,12 @@
 
 Rails.application.routes.draw do
   constraints(lambda { |req| req.format == :json }) do
-    resources :posts, only: %i[index create show], param: :slug do
+    resources :posts, only: %i[index create show update], param: :slug do
       collection do
         get :my_posts
       end
     end
-    put "/posts/:id", to: "posts#update"
+    # put "/posts/:id", to: "posts#update"
 
     resources :categories, only: %i[index create]
     resources :organizations, only: :index

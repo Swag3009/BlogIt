@@ -31,5 +31,5 @@ export const useShowPost = slug =>
 
 export const useUpdatePost = () =>
   useMutation({
-    mutationFn: ({ id, payload }) => postsApis.update(id, payload),
+    mutationFn: ({ slug, payload }) => postsApis.update(slug, payload),
   });
