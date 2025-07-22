@@ -5,7 +5,7 @@ class PostsController < ApplicationController
   after_action :verify_policy_scoped, only: %i[index my_posts]
 
   def index
-    posts = policy_scope(Post)
+    posts = policy_scope(Post).where(status: "published")
     posts = filter_by_categories(posts)
     @paginated_posts = paginate_posts(posts)
     render
