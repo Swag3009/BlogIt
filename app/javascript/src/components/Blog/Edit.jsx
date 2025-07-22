@@ -2,7 +2,7 @@ import React from "react";
 
 import { Typography, Button } from "@bigbinary/neetoui";
 import { Form, Input, Textarea, Select } from "@bigbinary/neetoui/formik";
-import { PageLoader } from "components/common";
+import { PageLoader, Header } from "components/common";
 import { useFetchCategories } from "hooks/reactQuery/useCategoriesApi";
 import { useUpdatePost } from "hooks/reactQuery/usePostsApi";
 import { pluck } from "ramda";
@@ -48,9 +48,10 @@ const EditPost = () => {
 
   return (
     <div>
-      <Typography className="mb-6" style="h1">
-        {t("title.editBlogPost")}
-      </Typography>
+      <div className="mb-6 flex items-center justify-between">
+        <Typography style="h1">{t("title.editBlogPost")}</Typography>
+        <Header />
+      </div>
       <div className="flex-1 rounded-xl border bg-white p-8 shadow">
         <Form
           className="space-y-6"

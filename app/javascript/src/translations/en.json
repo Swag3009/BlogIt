@@ -72,5 +72,9 @@
     "confirmPassword": "Confirm password",
     "selectOrganization": "Select organization"
   },
-  "imageAlt": {}
+  "dropdown": {
+    "saveAsDraft": "Save as draft",
+    "publish": "Publish",
+    "delete": "Delete"
+  }
 }
