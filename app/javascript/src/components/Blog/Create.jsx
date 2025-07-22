@@ -1,6 +1,5 @@
 import React, { useState } from "react";
 
-import { Typography, Button } from "@bigbinary/neetoui";
 import { Form, Input, Textarea, Select } from "@bigbinary/neetoui/formik";
 import { PageLoader, Header } from "components/common";
 import { useFetchCategories } from "hooks/reactQuery/useCategoriesApi";
@@ -52,18 +51,11 @@ const CreatePost = () => {
             onSubmit: handleCreate,
           }}
         >
-          <div className="mb-6 flex items-center justify-between">
-            <Typography style="h1">{t("title.newBlogPost")}</Typography>
-            <div className="flex space-x-4">
-              <Button style="secondary" type="reset">
-                {t("buttons.cancel")}
-              </Button>
-              <Header
-                handleStatusChange={handleStatusChange}
-                status={postStatus}
-              />
-            </div>
-          </div>
+          <Header
+            handleStatusChange={handleStatusChange}
+            status={postStatus}
+            title="newBlogPost"
+          />
           <Input
             required
             label={t("labels.title")}

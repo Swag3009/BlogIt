@@ -1,6 +1,5 @@
 import React, { useState, useRef } from "react";
 
-import { Typography, Button } from "@bigbinary/neetoui";
 import { Form, Input, Textarea, Select } from "@bigbinary/neetoui/formik";
 import { PageLoader, Header } from "components/common";
 import { useFetchCategories } from "hooks/reactQuery/useCategoriesApi";
@@ -76,20 +75,13 @@ const EditPost = () => {
             onSubmit: handleEdit,
           }}
         >
-          <div className="mb-6 flex items-center justify-between">
-            <Typography style="h1">{t("title.editBlogPost")}</Typography>
-            <div className="flex space-x-4">
-              <Button style="secondary" type="reset">
-                {t("buttons.cancel")}
-              </Button>
-              <Header
-                isEdit
-                handleDelete={handleDelete}
-                handleStatusChange={handleStatusChange}
-                status={postStatus}
-              />
-            </div>
-          </div>
+          <Header
+            isEdit
+            handleDelete={handleDelete}
+            handleStatusChange={handleStatusChange}
+            status={postStatus}
+            title="editBlogPost"
+          />
           <Input
             required
             label={t("labels.title")}

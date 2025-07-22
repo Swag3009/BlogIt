@@ -1,13 +1,25 @@
 import React, { useState } from "react";
 
-import { ActionDropdown, Alert } from "@bigbinary/neetoui";
+import {
+  ActionDropdown,
+  Alert,
+  Button,
+  Typography,
+  Dropdown,
+} from "@bigbinary/neetoui";
 import { useFormikContext } from "formik";
 import { useTranslation } from "react-i18next";
 
 import { STATUS } from "../constant";
 
-const Header = ({ handleStatusChange, isEdit, handleDelete, status }) => {
-  const { Menu, MenuItem, Divider } = ActionDropdown;
+const Header = ({
+  handleStatusChange,
+  isEdit,
+  handleDelete,
+  status,
+  title,
+}) => {
+  const { Menu, MenuItem } = ActionDropdown;
   const { submitForm } = useFormikContext();
   const [showPostDeleteAlert, setShowPostDeleteAlert] = useState(false);
 
@@ -17,40 +29,50 @@ const Header = ({ handleStatusChange, isEdit, handleDelete, status }) => {
   );
 
   return (
-    <div className="z-50 flex justify-end space-x-4">
-      <ActionDropdown
-        buttonStyle="primary"
-        label={statusLabel}
-        buttonProps={{
-          className: "bg-black",
-        }}
-        dropdownProps={{
-          buttonProps: {
+    <div className="z-50 flex justify-between space-x-4">
+      <Typography style="h1">{t(`title.${title}`)}</Typography>
+      <div className="flex items-center space-x-4">
+        <Button style="secondary" type="reset">
+          {t("buttons.cancel")}
+        </Button>
+        <ActionDropdown
+          buttonStyle="primary"
+          label={statusLabel}
+          buttonProps={{
             className: "bg-black",
-          },
-        }}
-        onClick={submitForm}
-      >
-        <Menu>
-          <MenuItem.Button onClick={() => handleStatusChange(STATUS.DRAFT)}>
-            {t("dropdown.saveAsDraft")}
-          </MenuItem.Button>
-          <MenuItem.Button onClick={() => handleStatusChange(STATUS.PUBLISH)}>
-            {t("dropdown.publish")}
-          </MenuItem.Button>
-          {isEdit && (
-            <>
-              <Divider />
+          }}
+          dropdownProps={{
+            buttonProps: {
+              className: "bg-black",
+            },
+          }}
+          onClick={submitForm}
+        >
+          <Menu>
+            <MenuItem.Button onClick={() => handleStatusChange(STATUS.DRAFT)}>
+              {t("dropdown.saveAsDraft")}
+            </MenuItem.Button>
+            <MenuItem.Button onClick={() => handleStatusChange(STATUS.PUBLISH)}>
+              {t("dropdown.publish")}
+            </MenuItem.Button>
+          </Menu>
+        </ActionDropdown>
+        {isEdit && (
+          <Dropdown
+            buttonStyle="link"
+            icon={() => <i className="ri-more-line text-2xl text-black" />}
+          >
+            <Menu>
               <MenuItem.Button
                 style="danger"
                 onClick={() => setShowPostDeleteAlert(true)}
               >
                 {t("dropdown.delete")}
               </MenuItem.Button>
-            </>
-          )}
-        </Menu>
-      </ActionDropdown>
+            </Menu>
+          </Dropdown>
+        )}
+      </div>
       <Alert
         isOpen={showPostDeleteAlert}
         message={t("message.deletePost")}
