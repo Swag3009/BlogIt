@@ -9,7 +9,7 @@ import { pluck } from "ramda";
 import { useTranslation } from "react-i18next";
 import { useHistory, useLocation } from "react-router-dom";
 
-import { POST_VALIDATION_SCHEMA } from "./constants";
+import { POST_VALIDATION_SCHEMA, MAX } from "./constants";
 
 import routes from "../../route";
 import { STATUS } from "../constant";
@@ -85,7 +85,7 @@ const EditPost = () => {
           <Input
             required
             label={t("labels.title")}
-            maxLength={125}
+            maxLength={MAX.LENGTH.TITLE}
             name="title"
             placeholder={t("placeHolder.enterTitle")}
           />
@@ -103,10 +103,10 @@ const EditPost = () => {
           <Textarea
             required
             label={t("labels.description")}
-            maxLength={10000}
+            maxLength={MAX.LENGTH.DESCRIPTION}
             name="description"
             placeholder={t("placeHolder.enterDescription")}
-            rows={10}
+            rows={MAX.ROW}
           />
         </Form>
       </div>

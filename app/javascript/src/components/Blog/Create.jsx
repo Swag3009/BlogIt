@@ -1,29 +1,32 @@
-import React from "react";
+import React, { useState } from "react";
 
 import { Typography, Button } from "@bigbinary/neetoui";
 import { Form, Input, Textarea, Select } from "@bigbinary/neetoui/formik";
-import { PageLoader } from "components/common";
+import { PageLoader, Header } from "components/common";
 import { useFetchCategories } from "hooks/reactQuery/useCategoriesApi";
 import { useCreatePost } from "hooks/reactQuery/usePostsApi";
 import { pluck } from "ramda";
 import { useTranslation } from "react-i18next";
 import { useHistory } from "react-router-dom";
-import changeKeysLabelAndValue from "utils/changeKeysLabelAndValue";
 
-import { POST_INITIAL_VALUES, POST_VALIDATION_SCHEMA } from "./constants";
+import { POST_INITIAL_VALUES, POST_VALIDATION_SCHEMA, MAX } from "./constants";
 
 import routes from "../../route";
+import { STATUS } from "../constant";
 
 const CreatePost = () => {
   const { t } = useTranslation();
   const history = useHistory();
   const { data: categories = [] } = useFetchCategories();
   const { mutate: createPost, isLoading } = useCreatePost();
-  const handleSubmit = ({ title, description, categories }) => {
+  const [postStatus, setPostStatus] = useState(STATUS.DRAFT);
+
+  const handleCreate = ({ title, description, categories }) => {
     const payload = {
       title,
       description,
-      category_ids: pluck("value", categories),
+      category_ids: pluck("id", categories),
+      status: postStatus,
     };
 
     createPost(payload, {
@@ -33,58 +36,59 @@ const CreatePost = () => {
     });
   };
 
+  const handleStatusChange = status => {
+    setPostStatus(status);
+  };
   if (isLoading) return <PageLoader />;
 
   return (
     <div>
-      <Typography className="mb-6" style="h1">
-        {t("title.newBlogPost")}
-      </Typography>
       <div className="flex-1 rounded-xl border bg-white p-8 shadow">
         <Form
           className="space-y-6"
           formikProps={{
             initialValues: POST_INITIAL_VALUES,
             validationSchema: POST_VALIDATION_SCHEMA,
-            onSubmit: handleSubmit,
+            onSubmit: handleCreate,
           }}
         >
+          <div className="mb-6 flex items-center justify-between">
+            <Typography style="h1">{t("title.newBlogPost")}</Typography>
+            <div className="flex space-x-4">
+              <Button style="secondary" type="reset">
+                {t("buttons.cancel")}
+              </Button>
+              <Header
+                handleStatusChange={handleStatusChange}
+                status={postStatus}
+              />
+            </div>
+          </div>
           <Input
             required
             label={t("labels.title")}
-            maxLength={125}
+            maxLength={MAX.LENGTH.TITLE}
             name="title"
             placeholder={t("placeHolder.enterTitle")}
           />
           <Select
             isMulti
             required
-            addButtonLabel="Add"
+            addButtonLabel={t("labels.add")}
             label={t("labels.categories")}
             name="categories"
-            options={changeKeysLabelAndValue(categories)}
+            optionRemapping={{ label: "name", value: "id" }}
+            options={categories}
             placeholder={t("placeHolder.selectCategories")}
           />
           <Textarea
             required
             label={t("labels.description")}
-            maxLength={10000}
+            maxLength={MAX.LENGTH.DESCRIPTION}
             name="description"
             placeholder={t("placeHolder.enterDescription")}
-            rows={10}
+            rows={MAX.ROW}
           />
-          <div className="flex justify-end space-x-6">
-            <Button style="secondary" type="reset">
-              {t("buttons.cancel")}
-            </Button>
-            <Button
-              className="bg-black hover:bg-gray-600"
-              style="primary"
-              type="submit"
-            >
-              {t("buttons.submit")}
-            </Button>
-          </div>
         </Form>
       </div>
     </div>
