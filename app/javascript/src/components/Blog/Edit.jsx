@@ -23,6 +23,7 @@ const EditPost = () => {
   const { data: categories = [] } = useFetchCategories();
   const { mutate: updatePost, isLoading } = useUpdatePost();
   const { mutate: deletePost } = useDeletePost();
+  const [isPreview, setIsPreview] = useState(false);
   const [postStatus, setPostStatus] = useState(STATUS.DRAFT);
   const POST_INITIAL_VALUES = {
     title,
@@ -36,17 +37,22 @@ const EditPost = () => {
       title,
       description,
       category_ids: pluck("id", categories),
-      status: postStatus,
+      status: isPreview ? STATUS.DRAFT : postStatus,
     };
+    const redirectPath = isPreview ? `/blogs/${slug}/show` : routes.blogs;
 
     updatePost(
       { slug, payload },
       {
         onSuccess: () => {
-          history.push(routes.blogs);
+          history.push(redirectPath);
         },
       }
     );
+  };
+
+  const handlePreview = () => {
+    setIsPreview(true);
   };
 
   const handleDelete = () => {
@@ -78,6 +84,7 @@ const EditPost = () => {
           <Header
             isEdit
             handleDelete={handleDelete}
+            handlePreview={handlePreview}
             handleStatusChange={handleStatusChange}
             status={postStatus}
             title="editBlogPost"

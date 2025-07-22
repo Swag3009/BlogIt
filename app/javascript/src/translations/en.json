@@ -61,7 +61,8 @@
     "passwordConfirmation": "Password confirmation",
     "organization": "Organization",
     "email": "Email",
-    "signout": "Sign out"
+    "signout": "Sign out",
+    "draft": "Draft"
   },
   "placeHolder": {
     "enterDescription": "Enter Description",
@@ -79,5 +80,9 @@
     "saveAsDraft": "Save as draft",
     "publish": "Publish",
     "delete": "Delete"
+  },
+  "tooltip": {
+    "edit": "Edit",
+    "preview": "Preview"
   }
 }

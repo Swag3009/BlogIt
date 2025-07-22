@@ -16,6 +16,7 @@ const Header = ({
   handleStatusChange,
   isEdit,
   handleDelete,
+  handlePreview,
   status,
   title,
 }) => {
@@ -32,6 +33,19 @@ const Header = ({
     <div className="z-50 flex justify-between space-x-4">
       <Typography style="h1">{t(`title.${title}`)}</Typography>
       <div className="flex items-center space-x-4">
+        <Button
+          style="link"
+          tooltipProps={{
+            content: t("tooltip.preview"),
+            position: "left",
+          }}
+          onClick={() => {
+            handlePreview();
+            submitForm();
+          }}
+        >
+          <i className="ri-arrow-right-up-line text-2xl text-black" />
+        </Button>
         <Button style="secondary" type="reset">
           {t("buttons.cancel")}
         </Button>
