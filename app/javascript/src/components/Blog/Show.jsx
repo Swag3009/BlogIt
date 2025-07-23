@@ -29,18 +29,8 @@ const Show = () => {
   } = useShowPost(slug);
 
   const handleNaviagteToEdit = () => {
-    const postData = {
-      title,
-      description,
-      author_name,
-      categories,
-      updatedAt,
-      slug,
-    };
-
     history.push({
       pathname: `/blogs/${slug}/edit`,
-      state: { postData },
     });
   };
 

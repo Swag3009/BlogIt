@@ -1,12 +1,16 @@
 import React, { useState, useRef } from "react";
 
 import { Form, Input, Textarea, Select } from "@bigbinary/neetoui/formik";
-import { PageLoader, Header } from "components/common";
+import { PageLoader, Header, ErrorMessage } from "components/common";
 import { useFetchCategories } from "hooks/reactQuery/useCategoriesApi";
-import { useUpdatePost, useDeletePost } from "hooks/reactQuery/usePostsApi";
+import {
+  useUpdatePost,
+  useDeletePost,
+  useShowPost,
+} from "hooks/reactQuery/usePostsApi";
 import { pluck } from "ramda";
 import { useTranslation } from "react-i18next";
-import { useHistory, useLocation } from "react-router-dom";
+import { useHistory, useParams } from "react-router-dom";
 
 import { POST_VALIDATION_SCHEMA, MAX } from "./constants";
 
@@ -16,10 +20,16 @@ import { STATUS } from "../constant";
 const EditPost = () => {
   const { t } = useTranslation();
   const history = useHistory();
-  const location = useLocation();
-  const { postData } = location.state || {};
+  const { slug } = useParams();
+
+  const {
+    data: {
+      post: { title, description, categories: selectedCategories } = {},
+    } = {},
+    isFetching,
+    isError,
+  } = useShowPost(slug);
   const formikRef = useRef();
-  const { slug, title, description, categories: selectedCategories } = postData;
   const { data: categories = [] } = useFetchCategories();
   const { mutate: updatePost, isLoading } = useUpdatePost();
   const { mutate: deletePost } = useDeletePost();
@@ -67,7 +77,9 @@ const EditPost = () => {
     setPostStatus(status);
   };
 
-  if (isLoading) return <PageLoader />;
+  if (isLoading || isFetching) return <PageLoader />;
+
+  if (isError) return <ErrorMessage />;
 
   return (
     <div>

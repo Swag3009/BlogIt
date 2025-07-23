@@ -25,8 +25,8 @@ const ActionsDropdown = ({ row: { status, slug } }) => {
       </Typography>
       <Dropdown
         appendTo={() => document.body}
-        buttonStyle="text"
-        icon="ri-more-fill text-lg"
+        buttonStyle="link"
+        icon="ri-more-fill text-lg text-black"
         strategy="fixed"
       >
         <Menu>

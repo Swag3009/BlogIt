@@ -6,7 +6,7 @@ import { Link } from "react-router-dom";
 const Title = ({ row: { title, slug } }) => (
   <Tooltip content={title} position="top">
     <Link
-      className="inline-block max-w-[220px] truncate text-indigo-600 hover:underline"
+      className="inline-block truncate text-indigo-600 hover:underline"
       to={`/blogs/${slug}/edit`}
     >
       {title}
