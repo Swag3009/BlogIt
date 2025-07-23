@@ -2,6 +2,7 @@ import React, { useState } from "react";
 
 import { Form, Input, Textarea, Select } from "@bigbinary/neetoui/formik";
 import { PageLoader, Header } from "components/common";
+import { STATUS } from "components/constant";
 import { useFetchCategories } from "hooks/reactQuery/useCategoriesApi";
 import { useCreatePost } from "hooks/reactQuery/usePostsApi";
 import { pluck } from "ramda";
@@ -11,7 +12,6 @@ import { useHistory } from "react-router-dom";
 import { POST_INITIAL_VALUES, POST_VALIDATION_SCHEMA, MAX } from "./constants";
 
 import routes from "../../route";
-import { STATUS } from "../constant";
 
 const CreatePost = () => {
   const { t } = useTranslation();
