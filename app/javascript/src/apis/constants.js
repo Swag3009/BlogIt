@@ -7,5 +7,6 @@ export const URL = {
   ORGANIZATIONS: `/organizations`,
   USERS: `/users`,
   SESSION: `/session`,
+  MY_POSTS: `/posts/my_posts`,
 };
 export const DEFAULT_ERROR_NOTIFICATION = t("errors.default");

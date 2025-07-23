@@ -3,7 +3,7 @@ import React from "react";
 import { Typography, Tag } from "@bigbinary/neetoui";
 import dayjs from "dayjs";
 import { isNotEmpty } from "ramda";
-import { useHistory } from "react-router-dom/cjs/react-router-dom.min";
+import { useHistory } from "react-router-dom";
 
 const Card = ({ title, categories, author_name, createdAt, slug }) => {
   const history = useHistory();

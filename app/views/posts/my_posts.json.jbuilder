@@ -5,9 +5,8 @@ json.posts @paginated_posts do |post|
     :id,
     :slug,
     :title,
-    :description,
-    :created_at,
-    :updated_at
+    :updated_at,
+    :status
 
   json.author_name post.user.name
   json.categories post.categories, :id, :name

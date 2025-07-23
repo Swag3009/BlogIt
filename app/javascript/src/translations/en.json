@@ -2,13 +2,22 @@
   "title": {
     "blogPost": "Blog posts",
     "newBlogPost": "New blog post",
+    "editBlogPost": "Edit blog post",
     "categories": "CATEGORIES",
     "newCategory": "New category",
     "signUp": "Sign Up",
     "signIn": "Sign In",
     "orLoginNow": "Or Login Now",
     "orRegisterNow": "Or Register Now",
-    "alertToSignOut": "Are you sure you want to sign out?"
+    "alertToSignOut": "Are you sure you want to sign out?",
+    "alertToDeletePost": "Delete post",
+    "myBlogPosts": "My blog posts",
+    "column": {
+      "title": "TITLE",
+      "category": "CATEGORY",
+      "lastPublishedAt": "LAST PUBLISHED AT",
+      "status": "STATUS"
+    }
   },
   "buttons": {
     "cancel": "Cancel",
@@ -18,7 +27,8 @@
     "add": "Add",
     "loading": "Loading...",
     "register": "Register",
-    "signOut": "Sign out"
+    "signOut": "Sign out",
+    "delete": "Delete"
   },
   "errors": {
     "default": "Something went wrong!",
@@ -43,7 +53,8 @@
   "message": {
     "noBlogPost": "No blog posts available.",
     "noCategory": "No categories found",
-    "signOut": "You will be redirected to the sign in screen."
+    "signOut": "You will be redirected to the sign in screen.",
+    "deletePost": "Are you sure, you want to delete the post?"
   },
   "labels": {
     "title": "Title",
@@ -57,7 +68,8 @@
     "passwordConfirmation": "Password confirmation",
     "organization": "Organization",
     "email": "Email",
-    "signout": "Sign out"
+    "signout": "Sign out",
+    "draft": "Draft"
   },
   "placeHolder": {
     "enterDescription": "Enter Description",
@@ -71,5 +83,14 @@
     "confirmPassword": "Confirm password",
     "selectOrganization": "Select organization"
   },
-  "imageAlt": {}
+  "dropdown": {
+    "saveAsDraft": "Save as draft",
+    "publish": "Publish",
+    "delete": "Delete",
+    "unpublish": "Unpublish"
+  },
+  "tooltip": {
+    "edit": "Edit",
+    "preview": "Preview"
+  }
 }

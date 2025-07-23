@@ -68,6 +68,8 @@ group :test do
   # Use system testing [https://guides.rubyonrails.org/testing.html#system-testing]
 end
 
+gem "pundit"
+
 gem "react-rails", "~> 2.7.1"
 
 gem "data_migrate"
@@ -75,3 +77,15 @@ gem "data_migrate"
 gem "bcrypt", "~> 3.1", ">= 3.1.12"
 
 gem "will_paginate", "~> 4.0"
+
+gem "byebug"
+
+gem "simplecov", require: false, group: :test
+
+group :development, :test do
+  # Rails integration for factory_bot, a replacement for fixtures
+  gem "factory_bot_rails"
+
+  # For auto-generating demo data
+  gem "faker"
+end

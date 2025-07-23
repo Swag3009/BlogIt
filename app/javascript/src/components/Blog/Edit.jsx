@@ -1,34 +1,72 @@
-import React, { useState } from "react";
+import React, { useState, useRef } from "react";
 
 import { Form, Input, Textarea, Select } from "@bigbinary/neetoui/formik";
-import { PageLoader, Header } from "components/common";
-import { STATUS } from "components/constant";
+import { PageLoader, Header, ErrorMessage } from "components/common";
 import { useFetchCategories } from "hooks/reactQuery/useCategoriesApi";
-import { useCreatePost } from "hooks/reactQuery/usePostsApi";
+import {
+  useUpdatePost,
+  useDeletePost,
+  useShowPost,
+} from "hooks/reactQuery/usePostsApi";
 import { pluck } from "ramda";
 import { useTranslation } from "react-i18next";
-import { useHistory } from "react-router-dom";
+import { useHistory, useParams } from "react-router-dom";
 
-import { POST_INITIAL_VALUES, POST_VALIDATION_SCHEMA, MAX } from "./constants";
+import { POST_VALIDATION_SCHEMA, MAX } from "./constants";
 
 import routes from "../../route";
+import { STATUS } from "../constant";
 
-const CreatePost = () => {
+const EditPost = () => {
   const { t } = useTranslation();
   const history = useHistory();
-  const { data: categories = [] } = useFetchCategories();
-  const { mutate: createPost, isLoading } = useCreatePost();
-  const [postStatus, setPostStatus] = useState(STATUS.DRAFT);
+  const { slug } = useParams();
 
-  const handleCreate = ({ title, description, categories }) => {
+  const {
+    data: {
+      post: { title, description, categories: selectedCategories } = {},
+    } = {},
+    isFetching,
+    isError,
+  } = useShowPost(slug);
+  const formikRef = useRef();
+  const { data: categories = [] } = useFetchCategories();
+  const { mutate: updatePost, isLoading } = useUpdatePost();
+  const { mutate: deletePost } = useDeletePost();
+  const [isPreview, setIsPreview] = useState(false);
+  const [postStatus, setPostStatus] = useState(STATUS.DRAFT);
+  const POST_INITIAL_VALUES = {
+    title,
+    description,
+    categories: selectedCategories || [],
+    status: postStatus,
+  };
+
+  const handleEdit = ({ title, description, categories }) => {
     const payload = {
       title,
       description,
       category_ids: pluck("id", categories),
-      status: postStatus,
+      status: isPreview ? STATUS.DRAFT : postStatus,
     };
+    const redirectPath = isPreview ? `/blogs/${slug}/show` : routes.blogs;
 
-    createPost(payload, {
+    updatePost(
+      { slug, payload },
+      {
+        onSuccess: () => {
+          history.push(redirectPath);
+        },
+      }
+    );
+  };
+
+  const handlePreview = () => {
+    setIsPreview(true);
+  };
+
+  const handleDelete = () => {
+    deletePost(slug, {
       onSuccess: () => {
         history.push(routes.blogs);
       },
@@ -38,23 +76,30 @@ const CreatePost = () => {
   const handleStatusChange = status => {
     setPostStatus(status);
   };
-  if (isLoading) return <PageLoader />;
+
+  if (isLoading || isFetching) return <PageLoader />;
+
+  if (isError) return <ErrorMessage />;
 
   return (
     <div>
       <div className="flex-1 rounded-xl border bg-white p-8 shadow">
         <Form
           className="space-y-6"
+          ref={formikRef}
           formikProps={{
             initialValues: POST_INITIAL_VALUES,
             validationSchema: POST_VALIDATION_SCHEMA,
-            onSubmit: handleCreate,
+            onSubmit: handleEdit,
           }}
         >
           <Header
+            isEdit
+            handleDelete={handleDelete}
+            handlePreview={handlePreview}
             handleStatusChange={handleStatusChange}
             status={postStatus}
-            title="newBlogPost"
+            title="editBlogPost"
           />
           <Input
             required
@@ -67,6 +112,7 @@ const CreatePost = () => {
             isMulti
             required
             addButtonLabel={t("labels.add")}
+            defaultValue={selectedCategories}
             label={t("labels.categories")}
             name="categories"
             optionRemapping={{ label: "name", value: "id" }}
@@ -87,4 +133,4 @@ const CreatePost = () => {
   );
 };
 
-export default CreatePost;
+export default EditPost;

@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 
-import { Avatar, Typography, Button, Alert } from "@bigbinary/neetoui";
+import { Avatar, Alert } from "@bigbinary/neetoui";
 import { Popover } from "antd";
 import { resetAuthTokens } from "apis/axios";
 import { useSignOutUser } from "hooks/reactQuery/useAuthApi";
@@ -8,28 +8,9 @@ import { useTranslation } from "react-i18next";
 import { useHistory } from "react-router-dom";
 import useAuthStore from "store/useAuthStore";
 
-import routes from "../route";
+import ProfileContent from "./Content";
 
-const ProfileContent = ({ onSignOut, t, name, email }) => (
-  <div className="ml-20 inline-block rounded border bg-white p-4 shadow">
-    <div className="flex items-center space-x-3">
-      <Avatar size="large" user={{ name }} />
-      <div>
-        <Typography style="h5">{name}</Typography>
-        <Typography className="text-gray-500" style="body3">
-          {email}
-        </Typography>
-      </div>
-    </div>
-    <hr className="my-3" />
-    <Button
-      className="text-red-500"
-      label={t("labels.signout")}
-      style="link"
-      onClick={onSignOut}
-    />
-  </div>
-);
+import routes from "../../route";
 
 const Profile = () => {
   const history = useHistory();

@@ -4,7 +4,10 @@ en:
     incorrect_credentials: "Incorrect credentials, try again."
   successfully_created: "%{entity} was successfully created!"
   successfully_updated: "%{entity} was successfully updated!"
+  successfully_deleted: "%{entity} was successfully deleted!"
   generic_error: "Something went wrong. Please try again later."
   post:
     slug:
       immutable: "is immutable!"
+  authorization:
+    denied: "Access denied. You are not authorized to perform this action."

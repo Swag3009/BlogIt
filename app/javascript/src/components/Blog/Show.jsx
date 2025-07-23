@@ -1,14 +1,17 @@
 import React from "react";
 
-import { Typography, Tag, Avatar } from "@bigbinary/neetoui";
+import { Typography, Tag, Avatar, Button } from "@bigbinary/neetoui";
 import { ErrorMessage, PageLoader } from "components/common";
 import dayjs from "dayjs";
 import { useShowPost } from "hooks/reactQuery/usePostsApi";
 import { isNotEmpty } from "ramda";
-import { useParams } from "react-router-dom";
+import { useTranslation } from "react-i18next";
+import { useParams, useHistory } from "react-router-dom";
 
 const Show = () => {
+  const { t } = useTranslation();
   const { slug } = useParams();
+  const history = useHistory();
   const {
     data: {
       post: {
@@ -16,12 +19,20 @@ const Show = () => {
         description,
         author_name,
         categories,
-        created_at: createdAt,
+        can_edit: canEdit,
+        updated_at: updatedAt,
+        status,
       } = {},
     } = {},
     isLoading,
     isError,
   } = useShowPost(slug);
+
+  const handleNaviagteToEdit = () => {
+    history.push({
+      pathname: `/blogs/${slug}/edit`,
+    });
+  };
 
   if (isLoading) return <PageLoader />;
 
@@ -37,7 +48,25 @@ const Show = () => {
             ))}
           </div>
         )}
-        <Typography style="h1">{title}</Typography>
+        <div className="flex items-center justify-between">
+          <div className="flex items-center space-x-4">
+            <Typography style="h1">{title}</Typography>
+            {status === "draft" && (
+              <Tag label={t("labels.draft")} style="danger" />
+            )}
+          </div>
+          {canEdit && (
+            <Button
+              style="link"
+              tooltipProps={{
+                content: t("tooltip.edit"),
+              }}
+              onClick={handleNaviagteToEdit}
+            >
+              <i className="ri-edit-line text-2xl text-black" />
+            </Button>
+          )}
+        </div>
         <div className="flex space-x-2">
           <Avatar
             user={{
@@ -53,7 +82,7 @@ const Show = () => {
               style="body3"
               weight="semibold"
             >
-              {dayjs(createdAt).format("DD MMMM YYYY")}
+              {dayjs(updatedAt).format("DD MMMM YYYY")}
             </Typography>
           </div>
         </div>
