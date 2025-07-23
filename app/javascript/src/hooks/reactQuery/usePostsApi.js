@@ -1,7 +1,7 @@
 import { QUERY_KEYS } from "constants/query";
 
 import postsApis from "apis/posts";
-import { useQuery, useMutation } from "react-query";
+import { useQuery, useMutation, useQueryClient } from "react-query";
 
 export const useFetchPosts = ({
   selectedCategories,
@@ -39,12 +39,24 @@ export const useShowPost = slug =>
     queryFn: () => postsApis.show(slug),
   });
 
-export const useUpdatePost = () =>
-  useMutation({
-    mutationFn: ({ slug, payload }) => postsApis.update(slug, payload),
-  });
+export const useUpdatePost = () => {
+  const queryClient = useQueryClient();
 
-export const useDeletePost = () =>
-  useMutation({
-    mutationFn: slug => postsApis.destroy(slug),
+  return useMutation({
+    mutationFn: ({ slug, payload }) => postsApis.update(slug, payload),
+    onSuccess: () => {
+      queryClient.invalidateQueries(QUERY_KEYS.MY_POSTS);
+    },
   });
+};
+
+export const useDeletePost = () => {
+  const queryClient = useQueryClient();
+
+  return useMutation({
+    mutationFn: slug => postsApis.destroy(slug),
+    onSuccess: () => {
+      queryClient.invalidateQueries(QUERY_KEYS.MY_POSTS);
+    },
+  });
+};
