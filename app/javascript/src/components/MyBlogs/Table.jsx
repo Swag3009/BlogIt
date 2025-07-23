@@ -4,13 +4,14 @@ import { Table as BlogTable } from "@bigbinary/neetoui";
 import { PageLoader } from "components/common";
 
 import COLUMN from "./Column";
+import { DEFAULT_PAGE_SIZE } from "./constants";
 import usePostRows from "./hook";
 
 const Table = () => {
   const [currentPage, setCurrentPage] = useState(1);
   const { rows, totalEntries, isLoading } = usePostRows({
-    currentPage: 1,
-    postsPerPage: 10,
+    currentPage,
+    postsPerPage: DEFAULT_PAGE_SIZE,
   });
 
   if (isLoading) return <PageLoader />;
@@ -21,7 +22,7 @@ const Table = () => {
         rowSelection
         columnData={COLUMN}
         currentPageNumber={currentPage}
-        defaultPageSize={5}
+        defaultPageSize={DEFAULT_PAGE_SIZE}
         handlePageChange={page => setCurrentPage(page)}
         rowData={rows}
         totalCount={totalEntries}
