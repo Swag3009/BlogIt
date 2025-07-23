@@ -2,20 +2,18 @@
 
 class PostsController < ApplicationController
   after_action :verify_authorized, except: %i[index my_posts]
-  after_action :verify_policy_scoped, only: %i[index my_posts]
+  after_action :verify_policy_scoped, only: %i[index]
 
   def index
     posts = policy_scope(Post).where(status: "published")
     posts = filter_by_categories(posts)
     @paginated_posts = paginate_posts(posts)
-    render
   end
 
   def my_posts
     posts = PostPolicy::Scope.new(current_user, Post).personal
     posts = filter_by_categories(posts)
     @paginated_posts = paginate_posts(posts)
-    render
   end
 
   def create

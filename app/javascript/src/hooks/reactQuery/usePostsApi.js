@@ -18,6 +18,16 @@ export const useFetchPosts = ({
       }),
   });
 
+export const useFetchMyPosts = ({ currentPage, postsPerPage }) =>
+  useQuery({
+    queryKey: [QUERY_KEYS.MY_POSTS, currentPage, postsPerPage],
+    queryFn: () =>
+      postsApis.fetchMyPosts({
+        page: currentPage,
+        per_page: postsPerPage,
+      }),
+  });
+
 export const useCreatePost = () =>
   useMutation({
     mutationFn: payload => postsApis.create(payload),

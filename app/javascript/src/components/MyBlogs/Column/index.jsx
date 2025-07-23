@@ -15,8 +15,8 @@ const COLUMN = [
   },
   {
     title: "CATEGORY",
-    dataIndex: "category",
-    key: "category",
+    dataIndex: "categories",
+    key: "categories",
     width: 150,
   },
   {
