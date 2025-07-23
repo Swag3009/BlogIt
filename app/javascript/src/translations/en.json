@@ -10,7 +10,8 @@
     "orLoginNow": "Or Login Now",
     "orRegisterNow": "Or Register Now",
     "alertToSignOut": "Are you sure you want to sign out?",
-    "alertToDeletePost": "Delete post"
+    "alertToDeletePost": "Delete post",
+    "myBlogPosts": "My blog posts"
   },
   "buttons": {
     "cancel": "Cancel",

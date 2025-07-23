@@ -1,6 +1,7 @@
 const routes = {
   root: "/",
   blogs: "/",
+  myBlogs: "/myBlogs",
   signin: "/signin",
   signup: "/signup",
   createBlog: "/blogs/create",
