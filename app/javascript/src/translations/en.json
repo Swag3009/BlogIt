@@ -69,7 +69,14 @@
     "organization": "Organization",
     "email": "Email",
     "signout": "Sign out",
-    "draft": "Draft"
+    "draft": "Draft",
+    "columns": "Columns",
+    "column": {
+      "title": "Title",
+      "category": "Category",
+      "lastPublishedAt": "Last published at",
+      "status": "Status"
+    }
   },
   "placeHolder": {
     "enterDescription": "Enter Description",
