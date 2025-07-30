@@ -1,4 +1,5 @@
 import { t } from "i18next";
+import * as yup from "yup";
 
 export const DEFAULT_PAGE_SIZE = 10;
 export const COLUMN_DROPDOWN = [
@@ -28,3 +29,18 @@ export const SELECTED_COLUMNS = [
 ];
 
 export const TITLE_COLUMN = "title";
+
+export const FILTER_VALIDATION_SCHEMA = yup.object().shape({
+  title: yup
+    .string()
+    .max(125, t("errors.titleMax"))
+    .required(t("errors.titleRequired")),
+  categories: yup.array().min(1, t("errors.categoriesAtLeastOne")),
+  status: yup.array().min(1, t("errors.categoriesAtLeastOne")),
+});
+
+export const FILTER_INITIAL_VALUES = {
+  title: "",
+  categories: [],
+  status: [],
+};

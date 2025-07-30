@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 
 import {
   Button,
@@ -10,10 +10,12 @@ import { includes, equals } from "ramda";
 import { useTranslation } from "react-i18next";
 
 import { COLUMN_DROPDOWN, TITLE_COLUMN } from "./constants";
+import Filter from "./Filter";
 
 const Header = ({ selectedColumns, handleSelectedColumns }) => {
   const { t } = useTranslation();
   const { Menu, MenuItem } = ActionDropdown;
+  const [isFilterOpen, setIsFilterOpen] = useState(true);
 
   return (
     <div className="flex justify-between">
@@ -53,9 +55,13 @@ const Header = ({ selectedColumns, handleSelectedColumns }) => {
               ))}
             </Menu>
           </ActionDropdown>
-          <Button style="link">
+          <Button style="link" onClick={() => setIsFilterOpen(true)}>
             <i className="ri-filter-2-line text-3xl text-black" />
           </Button>
+          <Filter
+            isOpen={isFilterOpen}
+            onClose={() => setIsFilterOpen(false)}
+          />
         </div>
       </div>
     </div>

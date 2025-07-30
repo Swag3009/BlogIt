@@ -12,6 +12,7 @@
     "alertToSignOut": "Are you sure you want to sign out?",
     "alertToDeletePost": "Delete post",
     "myBlogPosts": "My blog posts",
+    "filter": "Filter",
     "column": {
       "title": "TITLE",
       "category": "CATEGORY",
@@ -28,7 +29,8 @@
     "loading": "Loading...",
     "register": "Register",
     "signOut": "Sign out",
-    "delete": "Delete"
+    "delete": "Delete",
+    "clearFilters": "Clear filters"
   },
   "errors": {
     "default": "Something went wrong!",
@@ -71,6 +73,7 @@
     "signout": "Sign out",
     "draft": "Draft",
     "columns": "Columns",
+    "status": "Status",
     "column": {
       "title": "Title",
       "category": "Category",
@@ -94,7 +97,8 @@
     "saveAsDraft": "Save as draft",
     "publish": "Publish",
     "delete": "Delete",
-    "unpublish": "Unpublish"
+    "unpublish": "Unpublish",
+    "draft": "Draft"
   },
   "tooltip": {
     "edit": "Edit",
